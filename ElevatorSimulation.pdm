@@ -1,7 +1,7 @@
 Coupled
     {
     Type = Root
-    Name = Ascensor
+    Name = ElevatorSimulation
     Ports = 0; 0
     Description = 
     Graphic
