@@ -7,11 +7,11 @@ va_start(parameters,t);
 //where:
 //      %Name% is the parameter name
 //	%Type% is the parameter type
-	current_flor = 1;
-	final_flor = 1;
-	free = true;
-	sigma = INF;
-	stop = false;
+	current_floor = 1;
+	final_floor   = 1;
+	free          = true;
+	sigma         = INF;
+	stop          = false;
 }
 double state::ta(double t) {
 //This function returns a double.
@@ -26,28 +26,28 @@ void state::dext(Event x, double t) {
 //     'x.value' is the value (pointer to void)
 //     'x.port' is the port number
 //     'e' is the time elapsed since last transition
-	if (final_flor != x.0.value && !free){
-		current_flor = x.0.value;
-		free = false;
+	if (final_floor != x.0.value && !free){
+		current_floor = x.0.value;
+		free  = false;
 		sigma = INF;
-		stop = false;
+		stop  = false;
 	}
-	if (final_flor == x.0.value){
-		current_flor = x.0.value;
-		free = true;
+	if (final_floor == x.0.value){
+		current_floor = x.0.value;
+		free  = true;
 		sigma = 0;
-		stop = true;
+		stop  = true;
 	}
 	if (free x.1.value != nil){
-		final_flor x.1.value;
-		free = false;
+		final_floor x.1.value;
+		free  = false;
 		sigma = 0;
-		stop = false;
+		stop  = false;
 	}
 	if (!free && x.1.value != nil){
-		free = false;
+		free  = false;
 		sigma = INF;
-		stop = false;
+		stop  = false;
 	}
 }
 Event state::lambda(double t) {
@@ -56,11 +56,11 @@ Event state::lambda(double t) {
 //where:
 //     %&Value% points to the variable which contains the value.
 //     %NroPort% is the port number (from 0 to n-1)
-	if (final_flor > current_flor && !free)
+	if (final_floor > current_floor && !free)
 		return Event("arriba",0) && Event("ocupado",1);
-	if (final_flor < current_flor && !free)
+	if (final_floor < current_floor && !free)
 		return Event("abajo",0) && Event("ocupado",1);
-	if (final_flor == current_flor && free)
+	if (final_floor == current_floor && free)
 		return Event("parar",0) && Event("libre",1);
 }
 void state::exit() {
