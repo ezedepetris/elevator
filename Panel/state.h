@@ -1,4 +1,4 @@
-//CPP:/home/ezequiel/Documents/elevator/Panel/state.cpp
+//CPP:/home/gaston/Escritorio/elevator/Panel/state.cpp
 #if !defined state_h
 #define state_h
 
@@ -12,10 +12,12 @@ class state: public Simulator {
 // Declare the state,
 // output variables
 // and parameters
-int priorityqueue;
-int next_floor;
-int time_advance;
-int state;
+
+List request_list;
+int current_flor;
+double sigma;
+bool free;
+
 public:
 	state(const char *n): Simulator(n) {};
 	void init(double, ...);
