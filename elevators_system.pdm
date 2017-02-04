@@ -40,7 +40,7 @@ Coupled
             {
             Name = panel
             Ports = 3 ; 2
-            Path = 
+            Path = elevator/panel.h
             Description = Atomic DEVS model
             Graphic
                 {
@@ -58,7 +58,7 @@ Coupled
             {
             Name = controller_one
             Ports = 2 ; 2
-            Path = 
+            Path = elevator/controller.h
             Description = Atomic DEVS model
             Graphic
                 {
@@ -76,7 +76,7 @@ Coupled
             {
             Name = controller_two
             Ports = 2 ; 2
-            Path = 
+            Path = elevator/controller.h
             Description = Atomic DEVS model
             Graphic
                 {
@@ -94,7 +94,7 @@ Coupled
             {
             Name = elevator_one
             Ports = 1 ; 2
-            Path = 
+            Path = elevator/elevator.h
             Description = Atomic DEVS model
             Graphic
                 {
@@ -130,7 +130,7 @@ Coupled
             {
             Name = elevator_two
             Ports = 1 ; 2
-            Path = 
+            Path = elevator/elevator.h
             Description = Atomic DEVS model
             Graphic
                 {
@@ -169,7 +169,7 @@ Coupled
             {
             Source = Cmp ;  3 ;  1 ; 0
             Sink = Cmp ;  5 ;  1 ; -1
-            PointX = -5700 ; -4515 ; -4515
+            PointX = -5700 ; -5700 ; -4515
             PointY = -1200 ; -1200 ; -1200
             }
         Line
