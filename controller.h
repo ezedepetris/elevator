@@ -1,6 +1,6 @@
-//CPP:/home/gaston/Escritorio/elevator/Panel/state.cpp
-#if !defined state_h
-#define state_h
+//CPP:continuous_system/controller.cpp
+#if !defined controller_h
+#define controller_h
 
 #include "simulator.h"
 #include "event.h"
@@ -8,18 +8,13 @@
 
 
 
-class state: public Simulator { 
+class controller: public Simulator { 
 // Declare the state,
 // output variables
 // and parameters
 
-List request_list;
-int current_flor;
-double sigma;
-bool free;
-
 public:
-	state(const char *n): Simulator(n) {};
+	controller(const char *n): Simulator(n) {};
 	void init(double, ...);
 	double ta(double t);
 	void dint(double);
