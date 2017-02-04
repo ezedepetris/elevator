@@ -11,7 +11,7 @@ va_start(parameters,t);
 }
 double controller::ta(double t) {
 //This function returns a double.
-
+  return sigma;
 }
 void controller::dint(double t) {
 
@@ -22,7 +22,18 @@ void controller::dext(Event x, double t) {
 //     'x.value' is the value (pointer to void)
 //     'x.port' is the port number
 //     'e' is the time elapsed since last transition
-
+  if (x.port == 0){
+    final_floor = x.value;
+  }
+  else{
+    current_floor = x.value;
+    if (x.value == final_floor){
+      sigma = 0;
+    }
+    else{
+      sigma = INF;
+    }
+  }
 }
 Event controller::lambda(double t) {
 //This function returns an Event:

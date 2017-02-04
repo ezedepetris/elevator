@@ -8,11 +8,13 @@
 
 
 
-class controller: public Simulator { 
+class controller: public Simulator {
 // Declare the state,
 // output variables
 // and parameters
-
+  int current_floor = 1;
+  int final_floor;
+  int sigma = INF;
 public:
 	controller(const char *n): Simulator(n) {};
 	void init(double, ...);
