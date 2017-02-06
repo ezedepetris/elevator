@@ -1,5 +1,5 @@
-#include "priority_panel.h"
-void priority_panel::init(double t,...) {
+#include "alternate_panel.h"
+void alternate_panel::init(double t,...) {
 //The 'parameters' variable contains the parameters transferred from the editor.
 va_list parameters;
 va_start(parameters,t);
@@ -9,19 +9,21 @@ va_start(parameters,t);
 //	%Type% is the parameter type
 
 }
-double priority_panel::ta(double t) {
+double alternate_panel::ta(double t) {
 //This function returns a double.
   return sigma;
 }
-void priority_panel::dint(double t) {
-  if (state_one == 0){
+void alternate_panel::dint(double t) {
+  if (last == 2){
     state_one = 1;
+    last = 1;
   }
   else{
     state_two = 1;
+    last = 2;
   }
 }
-void priority_panel::dext(Event x, double t) {
+void alternate_panel::dext(Event x, double t) {
 //The input event is in the 'x' variable.
 //where:
 //     'x.value' is the value (pointer to void)
@@ -33,36 +35,49 @@ void priority_panel::dext(Event x, double t) {
   switch (x.port){
     case 0:
       floor_queue.push(x.value);
-      if (state_one == 0) || (state_two == 0){
+      if (state_one == 0 && last == 2) || (state_two == 0 && last == 1){
         sigma = 0;
+        break;
       }
-      else{
+      if (state_one == 1 && last == 2) || (state_two == 1 && last == 1){
         sigma = INF;
+        break;
       }
-      break;
     case 1:
-      state_one = x.value;
-      if (!floor_queue.empty() && (x.value == 0 || state_two == 0){
+      if (x.port == 0 && last == 2 && !floor_queue.empty()){
+        state_one = 0;
         sigma = 0;
+        break;
       }
-      if (floor_queue.empty() || (x.value == 1 && state_two == 1){
+      if(x.port == 0 && (last == 1 || floor_queue.empty()){
+        state_one = 0;
         sigma = INF;
+        break;
+      }if(x.port == 1){
+        state_one = 1;
+        sigma = INF;
+        break;
       }
-      break;
     case 2:
-      state_two = x.value;
-      if (!floor_queue.empty() && (x.value == 0 || state_one == 0){
+      if (x.port == 0 && last == 1 && !floor_queue.empty()){
+        state_two = 0;
         sigma = 0;
+        break;
       }
-      if (floor_queue.empty() || (x.value == 1 && state_one == 1){
+      if(x.port == 0 && (last == 2 || floor_queue.empty()){
+        state_two = 0;
         sigma = INF;
+        break;
+      }if(x.port == 1){
+        state_two = 1;
+        sigma = INF;
+        break;
       }
-      break;
     default:
-      break;
+    break;
   }
 }
-Event priority_panel::lambda(double t) {
+Event alternate_panel::lambda(double t) {
 //This function returns an Event:
 //     Event(%&Value%, %NroPort%)
 //where:
@@ -71,14 +86,9 @@ Event priority_panel::lambda(double t) {
 //     NroPort 0 = elevator one
 //     NroPort 1 = elevator two
   int floor = floor_queue.pop();
-  if (state_one == 0){
-    return Event(floor,0);
-  }
-  else{
-    return Event(floor,1);
-  }
+  return Event(floor,last-1);
 }
-void priority_panel::exit() {
+void alternate_panel::exit() {
 //Code executed at the end of the simulation.
 
 }

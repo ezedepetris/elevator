@@ -13,7 +13,7 @@ class priority_panel: public Simulator {
 // Declare the state,
 // output variables
 // and parameters
-  std::queue<int> flor_queue;
+  std::queue<int> floor_queue;
   int state_one = 0;
   int state_two = 0;
   int sigma = INF;
