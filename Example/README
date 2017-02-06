@@ -1,0 +1,29 @@
+========================
+BUILD OUTPUT DESCRIPTION
+========================
+
+Trabajo Práctico Final
+Materia: Simulación
+Autores: Coria Gaston - Tissera Adrian
+
+REQUISITOS:
+1-	Tener instalada alguna distribucion de linux. El programa fue escrito, 
+		compilado y testeado en Ubuntu 14.04
+
+2- 	Tener instalado Powerdevs (El programa fue escrito y testeado con Powerdevs 
+		v2.4 rev953)
+
+EJECUCIÓN:
+	Para ejecutar la aplicación descomprima el archivo 
+"Project2015-Coria-Tissera.zip". Luego debe copiar la carpeta "src" dentro de
+la carpeta "atomics" que se encuentra dentro del directorio donde se instaló
+Powerdevs.
+En el menú "File/Open" seleccione el archivo "simulation_final_project.pdm" 
+que se encuentra dentro de la carpeta del proyecto. Ahora puede correr la 
+simulación desde "Simulation/Simulate".
+
+Nota:
+
+	Luego de ejecutar el programa, dentro de la carpeta "powerdevs/output" se 
+encuentra el archivo de texto "pdevs.log" con los datos de salida de la 
+simulación.
