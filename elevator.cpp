@@ -14,13 +14,20 @@ double elevator::ta(double t) {
   return sigma;
 }
 void elevator::dint(double t) {
-  if (state == 1){
-    current_floor++;
+  if (output == 0){
+    output = 1;
+    sigma  = 0;
+    if (state == 1){
+      current_floor++;
+    }
+    else{
+      current_floor--;
+    }
   }
   else{
-    current_floor--;
+    output = 0;
+    sigma  = 2;
   }
-  sigma = 2;
 }
 void elevator::dext(Event x, double t) {
 //The input event is in the 'x' variable.
@@ -45,8 +52,12 @@ Event elevator::lambda(double t) {
 //     %NroPort% is the port number (from 0 to n-1)
 //     NroPort 0 = controller
 //     NroPort 1 = gnuplot
-
-return Event(&current_floor,0);
+  if (output == 0){
+    return Event(&current_floor,0);
+  }
+  else{
+    return Event(&current_floor,1);
+  }
 }
 void elevator::exit() {
 //Code executed at the end of the simulation.
