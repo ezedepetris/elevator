@@ -1,6 +1,6 @@
-//CPP:/home/ezequiel/Documents/elevator/Elevator/state.cpp
-#if !defined state_h
-#define state_h
+//CPP:continuous_system/elevator.cpp
+#if !defined elevator_h
+#define elevator_h
 
 #include "simulator.h"
 #include "event.h"
@@ -8,17 +8,16 @@
 
 
 
-class state: public Simulator { 
+class elevator: public Simulator {
 // Declare the state,
 // output variables
 // and parameters
-int floor;
-int distance_next_floor;
-int state;
-int time_next_floor;
-int stop;
+  int current_floor = 1;
+  int state = 0; // { -1 down, 0 stop, 1 up}
+  int sigma = INF;
+
 public:
-	state(const char *n): Simulator(n) {};
+	elevator(const char *n): Simulator(n) {};
 	void init(double, ...);
 	double ta(double t);
 	void dint(double);

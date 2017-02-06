@@ -1,0 +1,225 @@
+Coupled
+    {
+    Type = Root
+    Name = elevators_system
+    Ports = 0; 0
+    Description = 
+    Graphic
+        {
+        Position = 0; 0
+        Dimension = 600; 600
+        Direction = Right
+        Color = 15
+        Icon = 
+        Window = 5000; 5000; 5000; 5000
+        }
+    Parameters
+        {
+        }
+    System
+        {
+        Atomic
+            {
+            Name = floor_generator
+            Ports = 0 ; 1
+            Path = 
+            Description = Atomic DEVS model
+            Graphic
+                {
+                Position = -10905 ; -330
+                Dimension = 675 ; 675
+                Direction = Right
+                Color = 15
+                Icon = None
+                }
+            Parameters
+                {
+                }
+            }
+        Atomic
+            {
+            Name = panel
+            Ports = 3 ; 2
+            Path = elevator/panel.h
+            Description = Atomic DEVS model
+            Graphic
+                {
+                Position = -8655 ; -375
+                Dimension = 675 ; 750
+                Direction = Right
+                Color = 2
+                Icon = None
+                }
+            Parameters
+                {
+                }
+            }
+        Atomic
+            {
+            Name = controller_one
+            Ports = 2 ; 2
+            Path = elevator/controller.h
+            Description = Atomic DEVS model
+            Graphic
+                {
+                Position = -6480 ; -1380
+                Dimension = 675 ; 675
+                Direction = Right
+                Color = 13
+                Icon = None
+                }
+            Parameters
+                {
+                }
+            }
+        Atomic
+            {
+            Name = controller_two
+            Ports = 2 ; 2
+            Path = elevator/controller.h
+            Description = Atomic DEVS model
+            Graphic
+                {
+                Position = -6480 ; 945
+                Dimension = 675 ; 675
+                Direction = Right
+                Color = 13
+                Icon = None
+                }
+            Parameters
+                {
+                }
+            }
+        Atomic
+            {
+            Name = elevator_one
+            Ports = 1 ; 2
+            Path = elevator/elevator.h
+            Description = Atomic DEVS model
+            Graphic
+                {
+                Position = -4380 ; -1530
+                Dimension = 675 ; 675
+                Direction = Right
+                Color = 3
+                Icon = None
+                }
+            Parameters
+                {
+                }
+            }
+        Atomic
+            {
+            Name = plot
+            Ports = 2 ; 0
+            Path = 
+            Description = Atomic DEVS model
+            Graphic
+                {
+                Position = -2205 ; 45
+                Dimension = 675 ; 675
+                Direction = Right
+                Color = 6
+                Icon = None
+                }
+            Parameters
+                {
+                }
+            }
+        Atomic
+            {
+            Name = elevator_two
+            Ports = 1 ; 2
+            Path = elevator/elevator.h
+            Description = Atomic DEVS model
+            Graphic
+                {
+                Position = -4380 ; 795
+                Dimension = 675 ; 675
+                Direction = Right
+                Color = 3
+                Icon = None
+                }
+            Parameters
+                {
+                }
+            }
+        Line
+            {
+            Source = Cmp ;  1 ;  1 ; 0
+            Sink = Cmp ;  2 ;  2 ; -1
+            PointX = -10125 ; -10125 ; -8790
+            PointY = 0 ; 0 ; 0
+            }
+        Line
+            {
+            Source = Cmp ;  2 ;  1 ; 0
+            Sink = Cmp ;  3 ;  1 ; -1
+            PointX = -7875 ; -7575 ; -7575 ; -6615
+            PointY = -150 ; -150 ; -1200 ; -1200
+            }
+        Line
+            {
+            Source = Cmp ;  2 ;  2 ; 0
+            Sink = Cmp ;  4 ;  1 ; -1
+            PointX = -7875 ; -7875 ; -7575 ; -7575 ; -6615
+            PointY = 150 ; 150 ; 150 ; 1125 ; 1125
+            }
+        Line
+            {
+            Source = Cmp ;  3 ;  1 ; 0
+            Sink = Cmp ;  5 ;  1 ; -1
+            PointX = -5700 ; -5700 ; -4515
+            PointY = -1200 ; -1200 ; -1200
+            }
+        Line
+            {
+            Source = Cmp ;  3 ;  2 ; 0
+            Sink = Cmp ;  2 ;  1 ; -1
+            PointX = -5700 ; -5025 ; -5025 ; -9225 ; -9225 ; -8790
+            PointY = -900 ; -900 ; -1800 ; -1800 ; -225 ; -225
+            }
+        Line
+            {
+            Source = Cmp ;  5 ;  1 ; 0
+            Sink = Cmp ;  3 ;  2 ; -1
+            PointX = -3600 ; -3075 ; -3075 ; -7125 ; -7125 ; -6615
+            PointY = -1350 ; -1350 ; -150 ; -150 ; -900 ; -900
+            }
+        Line
+            {
+            Source = Cmp ;  5 ;  2 ; 0
+            Sink = Cmp ;  6 ;  1 ; -1
+            PointX = -3600 ; -2700 ; -2700 ; -2340
+            PointY = -1050 ; -1050 ; 225 ; 225
+            }
+        Line
+            {
+            Source = Cmp ;  4 ;  1 ; 0
+            Sink = Cmp ;  7 ;  1 ; -1
+            PointX = -5700 ; -5700 ; -4515
+            PointY = 1125 ; 1125 ; 1125
+            }
+        Line
+            {
+            Source = Cmp ;  4 ;  2 ; 0
+            Sink = Cmp ;  2 ;  3 ; -1
+            PointX = -5700 ; -5700 ; -5025 ; -5025 ; -9225 ; -9225 ; -8790
+            PointY = 1425 ; 1425 ; 1425 ; 2250 ; 2250 ; 225 ; 225
+            }
+        Line
+            {
+            Source = Cmp ;  7 ;  1 ; 0
+            Sink = Cmp ;  4 ;  2 ; -1
+            PointX = -3600 ; -3075 ; -3075 ; -7125 ; -7125 ; -6615
+            PointY = 975 ; 975 ; 375 ; 375 ; 1425 ; 1425
+            }
+        Line
+            {
+            Source = Cmp ;  7 ;  2 ; 0
+            Sink = Cmp ;  6 ;  2 ; -1
+            PointX = -3600 ; -3600 ; -2700 ; -2700 ; -2340
+            PointY = 1275 ; 1275 ; 1275 ; 525 ; 525
+            }
+        }
+    }
