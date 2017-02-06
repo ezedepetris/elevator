@@ -15,7 +15,7 @@ class elevator: public Simulator {
   int current_floor = 1;
   int state = 0; // { -1 down, 0 stop, 1 up}
   int sigma = INF;
-
+  int output = 0;
 public:
 	elevator(const char *n): Simulator(n) {};
 	void init(double, ...);
