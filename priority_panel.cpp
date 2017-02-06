@@ -1,5 +1,5 @@
-#include "panel.h"
-void panel::init(double t,...) {
+#include "priority_panel.h"
+void priority_panel::init(double t,...) {
 //The 'parameters' variable contains the parameters transferred from the editor.
 va_list parameters;
 va_start(parameters,t);
@@ -9,11 +9,11 @@ va_start(parameters,t);
 //	%Type% is the parameter type
 
 }
-double panel::ta(double t) {
+double priority_panel::ta(double t) {
 //This function returns a double.
   return sigma;
 }
-void panel::dint(double t) {
+void priority_panel::dint(double t) {
   if (state_one == 0){
     state_one = 1;
   }
@@ -21,7 +21,7 @@ void panel::dint(double t) {
     state_two = 1;
   }
 }
-void panel::dext(Event x, double t) {
+void priority_panel::dext(Event x, double t) {
 //The input event is in the 'x' variable.
 //where:
 //     'x.value' is the value (pointer to void)
@@ -62,7 +62,7 @@ void panel::dext(Event x, double t) {
     break;
   }
 }
-Event panel::lambda(double t) {
+Event priority_panel::lambda(double t) {
 //This function returns an Event:
 //     Event(%&Value%, %NroPort%)
 //where:
@@ -78,7 +78,7 @@ Event panel::lambda(double t) {
     return Event(flor,1);
   }
 }
-void panel::exit() {
+void priority_panel::exit() {
 //Code executed at the end of the simulation.
 
 }

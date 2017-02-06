@@ -43,7 +43,8 @@ Event elevator::lambda(double t) {
 //where:
 //     %&Value% points to the variable which contains the value.
 //     %NroPort% is the port number (from 0 to n-1)
-
+//     NroPort 0 = controller
+//     NroPort 1 = gnuplot
 
 return Event(&current_floor,0);
 }

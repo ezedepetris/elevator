@@ -15,6 +15,7 @@ class controller: public Simulator {
   int current_floor = 1;
   int final_floor;
   int sigma = INF;
+  int output = 0;
 public:
 	controller(const char *n): Simulator(n) {};
 	void init(double, ...);

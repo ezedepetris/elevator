@@ -1,6 +1,6 @@
-//CPP:continuous_system/codes/panel/panel.cpp
-#if !defined panel_h
-#define panel_h
+//CPP:continuous_system/codes/priority_panel/priority_panel.cpp
+#if !defined priority_panel_h
+#define priority_panel_h
 
 #include "simulator.h"
 #include "event.h"
@@ -9,7 +9,7 @@
 
 
 
-class panel: public Simulator {
+class priority_panel: public Simulator {
 // Declare the state,
 // output variables
 // and parameters
@@ -19,7 +19,7 @@ class panel: public Simulator {
   int sigma = INF;
 
 public:
-	panel(const char *n): Simulator(n) {};
+	priority_panel(const char *n): Simulator(n) {};
 	void init(double, ...);
 	double ta(double t);
 	void dint(double);
