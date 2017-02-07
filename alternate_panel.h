@@ -1,23 +1,24 @@
-//CPP:continuous_system/codes/alternate_panel/alternate_panel.cpp
+//CPP:elevator/alternate_panel.cpp
 #if !defined alternate_panel_h
 #define alternate_panel_h
 
 #include "simulator.h"
 #include "event.h"
 #include "stdarg.h"
-#include <queue>
+
+#include "queue"
 
 
-
-class alternate_panel: public Simulator {
+class alternate_panel: public Simulator { 
 // Declare the state,
 // output variables
 // and parameters
   std::queue<int> floor_queue;
-  int state_one = 0;
-  int state_two = 0;
-  int last = 0;
-  int sigma = INF;
+  int state_one;
+  int state_two;
+  int last;
+  double sigma;
+  double inf;
 
 public:
 	alternate_panel(const char *n): Simulator(n) {};

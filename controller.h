@@ -1,4 +1,4 @@
-//CPP:continuous_system/controller.cpp
+//CPP:elevator/controller.cpp
 #if !defined controller_h
 #define controller_h
 
@@ -8,14 +8,15 @@
 
 
 
-class controller: public Simulator {
+class controller: public Simulator { 
 // Declare the state,
 // output variables
 // and parameters
-  int current_floor = 1;
+  int current_floor;
   int final_floor;
-  int sigma = INF;
-  int output = 0;
+  double sigma;
+  double inf;
+  int output;
 public:
 	controller(const char *n): Simulator(n) {};
 	void init(double, ...);

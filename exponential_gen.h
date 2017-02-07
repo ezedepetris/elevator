@@ -1,5 +1,5 @@
-//CPP:src/lcgrand.cpp
-//CPP:src/exponential_gen.cpp
+//CPP:lcgrand.cpp
+//CPP:exponential_gen.cpp
 #if !defined exponential_gen_h
 #define exponential_gen_h
 
@@ -9,7 +9,7 @@
 
 #include "cmath"
 #include "string"
-#include "src/lcgrand.h"
+#include "lcgrand.h"
 
 
 class exponential_gen: public Simulator { 

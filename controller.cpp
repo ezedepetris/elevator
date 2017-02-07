@@ -7,7 +7,10 @@ va_start(parameters,t);
 //where:
 //      %Name% is the parameter name
 //	%Type% is the parameter type
-
+current_floor = 1;
+sigma = 1e10;
+inf = 1e10;
+output = 0;
 }
 double controller::ta(double t) {
 //This function returns a double.
@@ -19,7 +22,7 @@ void controller::dint(double t) {
     output = 1;
   }
   else{
-    sigma  = INF;
+    sigma  = inf;
     output = 0;
   }
 }
@@ -31,16 +34,17 @@ void controller::dext(Event x, double t) {
 //     'e' is the time elapsed since last transition
 //     NroPort 0 = panel
 //     NroPort 1 = elevator
+  int input = *(int*)(x.value);
   if (x.port == 0){
-    final_floor = x.value;
+    final_floor = input;
   }
   else{
-    current_floor = x.value;
-    if (x.value == final_floor){
+    current_floor = input;
+    if (input == final_floor){
       sigma = 0;
     }
     else{
-      sigma = INF;
+      sigma = inf;
     }
   }
 }
@@ -52,25 +56,31 @@ Event controller::lambda(double t) {
 //     %NroPort% is the port number (from 0 to n-1)
 //     NroPort 0 = elevator
 //     NroPort 1 = panel
+  int out_value;
   if (output == 0){
     if (current_floor < final_floor){
-      return Event(1,0)
+      out_value = 1;
+      return Event(&out_value,0);
     }
     else{
       if (current_floor > final_floor){
-        return Event(-1,0)
+        out_value = -1;
+        return Event(&out_value,0);
       }
       else{
-        return Event(0,0)
+        out_value = 0;
+        return Event(&out_value,0);
       }
     }
   }
   else{
     if (current_floor == final_floor){
-      return Event(0,1)
+      out_value = 0;
+      return Event(&out_value,1);
     }
     else{
-      return Event(1,1)
+      out_value = 1;
+      return Event(&out_value,1);
     }
   }
 }

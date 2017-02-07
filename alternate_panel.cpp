@@ -7,7 +7,11 @@ va_start(parameters,t);
 //where:
 //      %Name% is the parameter name
 //	%Type% is the parameter type
-
+state_one = 0;
+state_two = 0;
+last = 0;
+sigma = 1e10;
+inf = 1e10;
 }
 double alternate_panel::ta(double t) {
 //This function returns a double.
@@ -32,15 +36,17 @@ void alternate_panel::dext(Event x, double t) {
 //     NroPort 0 = generator
 //     NroPort 1 = controller one
 //     NroPort 2 = controller two
+  int input;
+  input = *(int*)(x.value);
   switch (x.port){
     case 0:
-      floor_queue.push(x.value);
-      if (state_one == 0 && last == 2) || (state_two == 0 && last == 1){
+      floor_queue.push(input);
+      if ((state_one == 0 && last == 2) || (state_two == 0 && last == 1)){
         sigma = 0;
         break;
       }
-      if (state_one == 1 && last == 2) || (state_two == 1 && last == 1){
-        sigma = INF;
+      if ((state_one == 1 && last == 2) || (state_two == 1 && last == 1)){
+        sigma = inf;
         break;
       }
     case 1:
@@ -49,13 +55,13 @@ void alternate_panel::dext(Event x, double t) {
         sigma = 0;
         break;
       }
-      if(x.port == 0 && (last == 1 || floor_queue.empty()){
+      if(x.port == 0 && (last == 1 || floor_queue.empty())){
         state_one = 0;
-        sigma = INF;
+        sigma = inf;
         break;
       }if(x.port == 1){
         state_one = 1;
-        sigma = INF;
+        sigma = inf;
         break;
       }
     case 2:
@@ -64,13 +70,13 @@ void alternate_panel::dext(Event x, double t) {
         sigma = 0;
         break;
       }
-      if(x.port == 0 && (last == 2 || floor_queue.empty()){
+      if(x.port == 0 && (last == 2 || floor_queue.empty())){
         state_two = 0;
-        sigma = INF;
+        sigma = inf;
         break;
       }if(x.port == 1){
         state_two = 1;
-        sigma = INF;
+        sigma = inf;
         break;
       }
     default:
@@ -85,8 +91,9 @@ Event alternate_panel::lambda(double t) {
 //     %NroPort% is the port number (from 0 to n-1)
 //     NroPort 0 = elevator one
 //     NroPort 1 = elevator two
-  int floor = floor_queue.pop();
-  return Event(floor,last-1);
+  int floor = floor_queue.front();
+  floor_queue.pop();
+  return Event(&floor,last-1);
 }
 void alternate_panel::exit() {
 //Code executed at the end of the simulation.

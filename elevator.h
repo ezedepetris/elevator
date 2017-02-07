@@ -1,4 +1,4 @@
-//CPP:continuous_system/elevator.cpp
+//CPP:elevator/elevator.cpp
 #if !defined elevator_h
 #define elevator_h
 
@@ -8,14 +8,15 @@
 
 
 
-class elevator: public Simulator {
+class elevator: public Simulator { 
 // Declare the state,
 // output variables
 // and parameters
-  int current_floor = 1;
-  int state = 0; // { -1 down, 0 stop, 1 up}
-  int sigma = INF;
-  int output = 0;
+  int current_floor;
+  int state;
+  double sigma;
+  double inf;
+  int output;
 public:
 	elevator(const char *n): Simulator(n) {};
 	void init(double, ...);

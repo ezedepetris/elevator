@@ -7,7 +7,11 @@ va_start(parameters,t);
 //where:
 //      %Name% is the parameter name
 //	%Type% is the parameter type
-
+current_floor = 1;
+state = 0; // { -1 down, 0 stop, 1 up}
+sigma = 1e10;
+inf = 1e10;
+output = 0;
 }
 double elevator::ta(double t) {
 //This function returns a double.
@@ -35,13 +39,13 @@ void elevator::dext(Event x, double t) {
 //     'x.value' is the value (pointer to void)
 //     'x.port' is the port number
 //     'e' is the time elapsed since last transition
-  int input = x.value;
+  int input = *(int*)x.value;
   state = input;
   if (input != 0){
     sigma = 2000;
   }
   else{
-    sigma = INF;
+    sigma = inf;
   }
 }
 Event elevator::lambda(double t) {

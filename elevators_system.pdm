@@ -22,7 +22,7 @@ Coupled
             {
             Name = floor_generator
             Ports = 0 ; 1
-            Path = 
+            Path = elevator/exponential_gen.h
             Description = Atomic DEVS model
             Graphic
                 {
@@ -40,7 +40,7 @@ Coupled
             {
             Name = panel
             Ports = 3 ; 2
-            Path = elevator/panel.h
+            Path = elevator/alternate_panel.h
             Description = Atomic DEVS model
             Graphic
                 {
@@ -110,24 +110,6 @@ Coupled
             }
         Atomic
             {
-            Name = plot
-            Ports = 2 ; 0
-            Path = 
-            Description = Atomic DEVS model
-            Graphic
-                {
-                Position = -2205 ; 45
-                Dimension = 675 ; 675
-                Direction = Right
-                Color = 6
-                Icon = None
-                }
-            Parameters
-                {
-                }
-            }
-        Atomic
-            {
             Name = elevator_two
             Ports = 1 ; 2
             Path = elevator/elevator.h
@@ -188,15 +170,8 @@ Coupled
             }
         Line
             {
-            Source = Cmp ;  5 ;  2 ; 0
-            Sink = Cmp ;  6 ;  1 ; -1
-            PointX = -3600 ; -2700 ; -2700 ; -2340
-            PointY = -1050 ; -1050 ; 225 ; 225
-            }
-        Line
-            {
             Source = Cmp ;  4 ;  1 ; 0
-            Sink = Cmp ;  7 ;  1 ; -1
+            Sink = Cmp ;  6 ;  1 ; -1
             PointX = -5700 ; -5700 ; -4515
             PointY = 1125 ; 1125 ; 1125
             }
@@ -209,17 +184,10 @@ Coupled
             }
         Line
             {
-            Source = Cmp ;  7 ;  1 ; 0
+            Source = Cmp ;  6 ;  1 ; 0
             Sink = Cmp ;  4 ;  2 ; -1
             PointX = -3600 ; -3075 ; -3075 ; -7125 ; -7125 ; -6615
             PointY = 975 ; 975 ; 375 ; 375 ; 1425 ; 1425
-            }
-        Line
-            {
-            Source = Cmp ;  7 ;  2 ; 0
-            Sink = Cmp ;  6 ;  2 ; -1
-            PointX = -3600 ; -3600 ; -2700 ; -2700 ; -2340
-            PointY = 1275 ; 1275 ; 1275 ; 525 ; 525
             }
         }
     }
