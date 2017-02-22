@@ -18,7 +18,7 @@ double alternate_panel::ta(double t) {
   return sigma;
 }
 void alternate_panel::dint(double t) {
-  sigma = 2;
+  sigma = inf;
   if (last == 2){
     state_one = busy;
     last = 1;
@@ -38,7 +38,11 @@ void alternate_panel::dext(Event x, double t) {
 //     NroPort 1 = generator
 //     NroPort 2 = controller two
   int  input = *((int*)x.value);
-  printLog("Panel input - floor %i in port %i at time %f\n", input, x.port, t);
+  if (x.port == 1){
+    printLog("PANEL:INPUT:GENERATOR - floor %i at time %f\n", input, t);
+  }else{
+    printLog("PANEL:INPUT:CONTROLLER_%i - floor %i  at time %f\n", x.port, input, t);
+  }
   switch (x.port){
     case 0:
       // controller_one && last_output = port_2
@@ -92,8 +96,7 @@ Event alternate_panel::lambda(double t) {
 //     NroPort 1 = elevator two
   output = floor_queue.front();
   floor_queue.pop();
-
-  printLog("Panel output - floor %i in port %i at time %f\n", output, last-1, t);
+  printLog("PANEL:OUTPUT:ELEVATOR_%1 - FLOOR %i at time %f\n", last-1, output, t);
   return Event(&output,last-1);
 }
 void alternate_panel::exit() {

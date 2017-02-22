@@ -35,7 +35,11 @@ void controller::dext(Event x, double t) {
 //     NroPort 0 = panel
 //     NroPort 1 = elevator
   int  input = *((int*)x.value);
-  printLog("Controller input - floor %i in port %i at time %f\n", input, x.port, t);
+  if (x.port == 0){
+    printLog("CONTROLLER:INPUT:PANEL - FLOOR %i  at time %f\n", input, t);
+  }else{
+    printLog("CONTROLLER:INPUT:ELEVATOR - FLOOR %i at time %f\n", input, x.port, t);
+  }
   
   if (x.port == 0){
     final_floor = input;
@@ -66,18 +70,18 @@ Event controller::lambda(double t) {
   if (output == 0){
     if (current_floor < final_floor){
       out_value = go_up;
-      printLog("Controller output in port 0 value %i \n", out_value);
+      printLog("CONTROLLER:OUTPUT:ELEVATOR -  VALUE 'GO UP' \n");
       return Event(&out_value,0);
     }
     else{
       if (current_floor > final_floor){
         out_value = go_down;
-        printLog("Controller output in port 0 value %i \n", out_value);
+        printLog("CONTROLLER:OUTPUT:ELEVATOR -  VALUE 'GO DOWN' \n");
         return Event(&out_value,0);
       }
       else{
         out_value = stop;
-        printLog("Controller output in port 0 value %i \n", out_value);
+        printLog("CONTROLLER:OUTPUT:ELEVATOR -  VALUE 'STOP' \n");
         return Event(&out_value,0);
       }
     }
@@ -85,7 +89,7 @@ Event controller::lambda(double t) {
   else{
     if (current_floor == final_floor){
       out_value = vacant;
-      printLog("Controller output in port 1 value %i \n", out_value);
+      printLog("CONTROLLER:OUTPUT:PANEL -  VALUE 'VACANT' \n");
       return Event(&out_value,1);
     }
   }
