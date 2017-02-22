@@ -17,7 +17,8 @@ double elevator::ta(double t) {
 //This function returns a double.
   return sigma;
 }
-void elevator::dint(double t) {    
+void elevator::dint(double t) {
+   
   if (state == going_up){
     current_floor++;
     distance_next_floor = 2;
@@ -59,7 +60,7 @@ void elevator::dext(Event x, double t) {
       state = stopped;
     }
     else{
-      distance_next_floor = distance_next_floor - 2*e
+      distance_next_floor = distance_next_floor - 2*e;
     }
   }
 }
