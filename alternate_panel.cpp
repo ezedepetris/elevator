@@ -41,7 +41,7 @@ void alternate_panel::dext(Event x, double t) {
   if (x.port == 1){
     printLog("PANEL:INPUT:GENERATOR - FLOOR %i - TIME %f \n", input, t);
   }else{
-    printLog("PANEL:INPUT:CONTROLLER_%i - FLOOR %i - TIME %f \n", x.port, input, t);
+    printLog("PANEL:INPUT:CONTROLLER_%i - VALUE 'VACANT' - TIME %f \n", x.port, t);
   }
   switch (x.port){
     case 0:
