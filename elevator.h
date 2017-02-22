@@ -13,6 +13,7 @@ class elevator: public Simulator {
 // output variables
 // and parameters
   int current_floor;
+  int distance_next_floor;
   int state;
   double sigma;
   double inf;

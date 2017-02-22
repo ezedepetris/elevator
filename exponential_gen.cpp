@@ -14,7 +14,8 @@ seed = (int)va_arg(parameters, double);
 vc = va_arg(parameters, double);
 deltaL = va_arg(parameters, double);
 
-sigma = initValue;
+time = new StochasticLib1(76);
+sigma = time -> exponential(9);
 y = "ARRIVE";
 }
 double exponential_gen::ta(double t) {
@@ -22,16 +23,8 @@ double exponential_gen::ta(double t) {
 return sigma;
 }
 void exponential_gen::dint(double t) {
-double rand;
-do{
-  rand = lcgrand(seed);
-  sigma = (double)-(1/expLambda) * log(1 - rand);
-/**  
-	if(sigma < (deltaL/vc)){
-		printLog("Creating new arrival\n");		
-  }
-**/
-} while (sigma < (deltaL/vc));
+sigma = time -> exponential(9);
+output = time -> uniform(0,9);
 
 }
 void exponential_gen::dext(Event x, double t) {
@@ -48,8 +41,9 @@ Event exponential_gen::lambda(double t) {
 //where:
 //     %&Value% points to the variable which contains the value.
 //     %NroPort% is the port number (from 0 to n-1)
-//printLog("Generator: %s at %f\n", y.c_str(), t);
-return Event(&y,0);
+	output++;
+
+return Event(&output,0);
 }
 void exponential_gen::exit() {
 //Code executed at the end of the simulation.

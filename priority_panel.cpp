@@ -14,6 +14,7 @@ double priority_panel::ta(double t) {
   return sigma;
 }
 void priority_panel::dint(double t) {
+  sigma = 2;
   if (state_one == 0){
     state_one = 1;
   }
@@ -27,25 +28,27 @@ void priority_panel::dext(Event x, double t) {
 //     'x.value' is the value (pointer to void)
 //     'x.port' is the port number
 //     'e' is the time elapsed since last transition
-//     NroPort 0 = generator
-//     NroPort 1 = controller one
+//     NroPort 0 = controller_one
+//     NroPort 1 = generator
 //     NroPort 2 = controller two
+  int  input = *((int*)x.value);
+  printLog("Panel input - floor %i in port %i at time %f\n", input, x.port, t)
   switch (x.port){
     case 0:
-      floor_queue.push(x.value);
-      if (state_one == 0) || (state_two == 0){
-        sigma = 0;
-      }
-      else{
-        sigma = INF;
-      }
-      break;
-    case 1:
       state_one = x.value;
       if (!floor_queue.empty() && (x.value == 0 || state_two == 0){
         sigma = 0;
       }
       if (floor_queue.empty() || (x.value == 1 && state_two == 1){
+        sigma = INF;
+      }
+      break;
+    case 1:
+      floor_queue.push(x.value);
+      if (state_one == 0) || (state_two == 0){
+        sigma = 0;
+      }
+      else{
         sigma = INF;
       }
       break;
@@ -60,8 +63,8 @@ void priority_panel::dext(Event x, double t) {
       break;
     default:
       break;
+    }
   }
-}
 Event priority_panel::lambda(double t) {
 //This function returns an Event:
 //     Event(%&Value%, %NroPort%)
@@ -70,12 +73,12 @@ Event priority_panel::lambda(double t) {
 //     %NroPort% is the port number (from 0 to n-1)
 //     NroPort 0 = elevator one
 //     NroPort 1 = elevator two
-  int floor = floor_queue.pop();
+  output = floor_queue.pop();
   if (state_one == 0){
-    return Event(floor,0);
+    return Event(&output,0);
   }
   else{
-    return Event(floor,1);
+    return Event(&output,1);
   }
 }
 void priority_panel::exit() {

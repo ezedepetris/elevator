@@ -9,7 +9,7 @@ va_start(parameters,t);
 //	%Type% is the parameter type
 state_one = 0;
 state_two = 0;
-last = 0;
+last = 2;
 sigma = 1e10;
 inf = 1e10;
 }
@@ -18,6 +18,7 @@ double alternate_panel::ta(double t) {
   return sigma;
 }
 void alternate_panel::dint(double t) {
+  sigma = 2;
   if (last == 2){
     state_one = 1;
     last = 1;
@@ -33,23 +34,13 @@ void alternate_panel::dext(Event x, double t) {
 //     'x.value' is the value (pointer to void)
 //     'x.port' is the port number
 //     'e' is the time elapsed since last transition
-//     NroPort 0 = generator
-//     NroPort 1 = controller one
+//     NroPort 0 = controller_one
+//     NroPort 1 = generator
 //     NroPort 2 = controller two
-  int input;
-  input = *(int*)(x.value);
+  int  input = *((int*)x.value);
+  printLog("Panel input - floor %i in port %i at time %f\n", input, x.port, t);
   switch (x.port){
     case 0:
-      floor_queue.push(input);
-      if ((state_one == 0 && last == 2) || (state_two == 0 && last == 1)){
-        sigma = 0;
-        break;
-      }
-      if ((state_one == 1 && last == 2) || (state_two == 1 && last == 1)){
-        sigma = inf;
-        break;
-      }
-    case 1:
       if (x.port == 0 && last == 2 && !floor_queue.empty()){
         state_one = 0;
         sigma = 0;
@@ -61,6 +52,21 @@ void alternate_panel::dext(Event x, double t) {
         break;
       }if(x.port == 1){
         state_one = 1;
+        sigma = inf;
+        break;
+      }
+    case 1:
+      floor_queue.push(input);
+      /*printLog("state one %i \n", state_one);
+      printLog("state two %i \n", state_two);
+      printLog("last %i \n", last);*/
+      if ((state_one == 0 && last == 2) || (state_two == 0 && last == 1)){
+        //printLog("Panel input - ESTOY AQUI 1 \n");
+        sigma = 0;
+        break;
+      }
+      if ((state_one == 1 && last == 2) || (state_two == 1 && last == 1)){
+        //printLog("Panel input - ESTOY AQUI 2 \n");
         sigma = inf;
         break;
       }
@@ -91,9 +97,11 @@ Event alternate_panel::lambda(double t) {
 //     %NroPort% is the port number (from 0 to n-1)
 //     NroPort 0 = elevator one
 //     NroPort 1 = elevator two
-  int floor = floor_queue.front();
+  output = floor_queue.front();
   floor_queue.pop();
-  return Event(&floor,last-1);
+
+  printLog("Panel output - floor %i in port %i at time %f\n", output, last-1, t);
+  return Event(&output,last-1);
 }
 void alternate_panel::exit() {
 //Code executed at the end of the simulation.

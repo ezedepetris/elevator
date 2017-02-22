@@ -17,6 +17,7 @@ class controller: public Simulator {
   double sigma;
   double inf;
   int output;
+  int out_value;
 public:
 	controller(const char *n): Simulator(n) {};
 	void init(double, ...);

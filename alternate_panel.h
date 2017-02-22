@@ -19,6 +19,7 @@ class alternate_panel: public Simulator {
   int last;
   double sigma;
   double inf;
+  int output;
 
 public:
 	alternate_panel(const char *n): Simulator(n) {};

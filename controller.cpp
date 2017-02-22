@@ -34,9 +34,12 @@ void controller::dext(Event x, double t) {
 //     'e' is the time elapsed since last transition
 //     NroPort 0 = panel
 //     NroPort 1 = elevator
-  int input = *(int*)(x.value);
+  int  input = *((int*)x.value);
+  printLog("Controller input - floor %i in port %i at time %f\n", input, x.port, t);
+  
   if (x.port == 0){
     final_floor = input;
+    sigma = 0;
   }
   else{
     current_floor = input;
@@ -56,19 +59,21 @@ Event controller::lambda(double t) {
 //     %NroPort% is the port number (from 0 to n-1)
 //     NroPort 0 = elevator
 //     NroPort 1 = panel
-  int out_value;
   if (output == 0){
     if (current_floor < final_floor){
       out_value = 1;
+      printLog("Controller output in port 0 value %i \n", out_value);
       return Event(&out_value,0);
     }
     else{
       if (current_floor > final_floor){
         out_value = -1;
+        printLog("Controller output in port 0 value %i \n", out_value);
         return Event(&out_value,0);
       }
       else{
         out_value = 0;
+        printLog("Controller output in port 0 value %i \n", out_value);
         return Event(&out_value,0);
       }
     }
@@ -76,10 +81,12 @@ Event controller::lambda(double t) {
   else{
     if (current_floor == final_floor){
       out_value = 0;
+      printLog("Controller output in port 1 value %i \n", out_value);
       return Event(&out_value,1);
     }
     else{
       out_value = 1;
+      printLog("Controller output in port 1 value %i \n", out_value);
       return Event(&out_value,1);
     }
   }

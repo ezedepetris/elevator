@@ -1,5 +1,7 @@
 //CPP:lcgrand.cpp
-//CPP:exponential_gen.cpp
+//CPP:elevator/stoc1.cpp
+//CPP:elevator/mersenne.cpp
+//CPP:elevator/exponential_gen.cpp
 #if !defined exponential_gen_h
 #define exponential_gen_h
 
@@ -10,6 +12,8 @@
 #include "cmath"
 #include "string"
 #include "lcgrand.h"
+#include "stoc1.h"
+#include "mersenne.h"
 
 
 class exponential_gen: public Simulator { 
@@ -21,6 +25,8 @@ std::string y;
 double expLambda;
 double initValue;
 int seed;
+StochasticLib1 *time;
+int output;
 
 double deltaL;
 double vc;

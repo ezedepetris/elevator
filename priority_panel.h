@@ -17,6 +17,7 @@ class priority_panel: public Simulator {
   int state_one = 0;
   int state_two = 0;
   int sigma = INF;
+  int output;
 
 public:
 	priority_panel(const char *n): Simulator(n) {};
