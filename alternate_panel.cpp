@@ -92,11 +92,11 @@ Event alternate_panel::lambda(double t) {
 //where:
 //     %&Value% points to the variable which contains the value.
 //     %NroPort% is the port number (from 0 to n-1)
-//     NroPort 0 = elevator one
-//     NroPort 1 = elevator two
+//     NroPort 0 = controller one
+//     NroPort 1 = controller two
   output = floor_queue.front();
   floor_queue.pop();
-  printLog("PANEL:OUTPUT:ELEVATOR_%i - FLOOR %i - TIME %f \n", last-1, output, t);
+  printLog("PANEL:OUTPUT:CONTROLLER_%i - FLOOR %i - TIME %f \n", last-1, output, t);
   return Event(&output,last-1);
 }
 void alternate_panel::exit() {
