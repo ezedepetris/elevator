@@ -39,9 +39,9 @@ void alternate_panel::dext(Event x, double t) {
 //     NroPort 2 = controller two
   int  input = *((int*)x.value);
   if (x.port == 1){
-    printLog("PANEL:INPUT:GENERATOR - floor %i at time %f\n", input, t);
+    printLog("PANEL:INPUT:GENERATOR - FLOOR %i - TIME %f \n", input, t);
   }else{
-    printLog("PANEL:INPUT:CONTROLLER_%i - floor %i  at time %f\n", x.port, input, t);
+    printLog("PANEL:INPUT:CONTROLLER_%i - FLOOR %i - TIME %f \n", x.port, input, t);
   }
   switch (x.port){
     case 0:
@@ -96,7 +96,7 @@ Event alternate_panel::lambda(double t) {
 //     NroPort 1 = elevator two
   output = floor_queue.front();
   floor_queue.pop();
-  printLog("PANEL:OUTPUT:ELEVATOR_%1 - FLOOR %i at time %f\n", last-1, output, t);
+  printLog("PANEL:OUTPUT:ELEVATOR_%i - FLOOR %i - TIME %f \n", last-1, output, t);
   return Event(&output,last-1);
 }
 void alternate_panel::exit() {

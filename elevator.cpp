@@ -41,12 +41,12 @@ void elevator::dext(Event x, double t) {
 //     'x.port' is the port number
 //     'e' is the time elapsed since last transition
   int input = *((int*)x.value);
-  printLog("ELEVATOR:INPUT - FLOOR %i at time %f\n", input, t);
   
   if (state == stopped){
     distance_next_floor = 2;
     sigma = 2;
     if (input == go_up){
+      printLog("ELEVATOR:INPUT - ACTION 'GO UP' - TIME %f\n", t);
       state = going_up;
     }
     if (input == go_down){
@@ -55,6 +55,7 @@ void elevator::dext(Event x, double t) {
   }
   else{
     if (input == stop){
+      printLog("ELEVATOR:INPUT - ACTION 'STOP' - TIME %f\n", t);
       distance_next_floor = 0;
       sigma = inf;
       state = stopped;
@@ -72,7 +73,7 @@ Event elevator::lambda(double t) {
 //     %NroPort% is the port number (from 0 to n-1)
 //     NroPort 0 = controller
 //     NroPort 1 = gnuplot
-  printLog("ELEVATOR:OUTPUT - FLOOR %i \n", current_floor);
+  printLog("ELEVATOR:OUTPUT - FLOOR %i - TIME %f \n", current_floor, t);
   return Event(&current_floor,0);
 }
 void elevator::exit() {

@@ -36,9 +36,9 @@ void controller::dext(Event x, double t) {
 //     NroPort 1 = elevator
   int  input = *((int*)x.value);
   if (x.port == 0){
-    printLog("CONTROLLER:INPUT:PANEL - FLOOR %i  at time %f\n", input, t);
+    printLog("CONTROLLER:INPUT:PANEL - FLOOR %i - TIME %f \n", input, t);
   }else{
-    printLog("CONTROLLER:INPUT:ELEVATOR - FLOOR %i at time %f\n", input, x.port, t);
+    printLog("CONTROLLER:INPUT:ELEVATOR - FLOOR %i - TIME %f \n", input, x.port, t);
   }
   
   if (x.port == 0){
@@ -70,18 +70,18 @@ Event controller::lambda(double t) {
   if (output == 0){
     if (current_floor < final_floor){
       out_value = go_up;
-      printLog("CONTROLLER:OUTPUT:ELEVATOR -  VALUE 'GO UP' \n");
+      printLog("CONTROLLER:OUTPUT:ELEVATOR -  VALUE 'GO UP' - TIME %f\n", t);
       return Event(&out_value,0);
     }
     else{
       if (current_floor > final_floor){
         out_value = go_down;
-        printLog("CONTROLLER:OUTPUT:ELEVATOR -  VALUE 'GO DOWN' \n");
+        printLog("CONTROLLER:OUTPUT:ELEVATOR -  VALUE 'GO DOWN' - TIME %f\n", t);
         return Event(&out_value,0);
       }
       else{
         out_value = stop;
-        printLog("CONTROLLER:OUTPUT:ELEVATOR -  VALUE 'STOP' \n");
+        printLog("CONTROLLER:OUTPUT:ELEVATOR -  VALUE 'STOP' - TIME %f\n", t);
         return Event(&out_value,0);
       }
     }
@@ -89,7 +89,7 @@ Event controller::lambda(double t) {
   else{
     if (current_floor == final_floor){
       out_value = vacant;
-      printLog("CONTROLLER:OUTPUT:PANEL -  VALUE 'VACANT' \n");
+      printLog("CONTROLLER:OUTPUT:PANEL -  VALUE 'VACANT' - TIME %f\n", t);
       return Event(&out_value,1);
     }
   }
