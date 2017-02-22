@@ -40,8 +40,12 @@ void alternate_panel::dext(Event x, double t) {
   int  input = *((int*)x.value);
   if (x.port == 1){
     printLog("PANEL:INPUT:GENERATOR - FLOOR %i - TIME %f \n", input, t);
-  }else{
-    printLog("PANEL:INPUT:CONTROLLER_%i - VALUE 'VACANT' - TIME %f \n", x.port, t);
+  }
+  if (x.port == 0){
+    printLog("PANEL:INPUT:CONTROLLER_1 - VALUE 'VACANT' - TIME %f \n", t);
+  }
+  if (x.port == 2){
+    printLog("PANEL:INPUT:CONTROLLER_2 - VALUE 'VACANT' - TIME %f \n", t);
   }
   switch (x.port){
     case 0:
@@ -96,7 +100,7 @@ Event alternate_panel::lambda(double t) {
 //     NroPort 1 = controller two
   output = floor_queue.front();
   floor_queue.pop();
-  printLog("PANEL:OUTPUT:CONTROLLER_%i - FLOOR %i - TIME %f \n", last-1, output, t);
+  printLog("PANEL:OUTPUT:CONTROLLER_%i - FLOOR %i - TIME %f \n", last, output, t);
   return Event(&output,last-1);
 }
 void alternate_panel::exit() {
