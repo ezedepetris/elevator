@@ -6,6 +6,7 @@
 #include "event.h"
 #include "stdarg.h"
 
+#include "elevator/constants.h"
 
 
 class controller: public Simulator { 

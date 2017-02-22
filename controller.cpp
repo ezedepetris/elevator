@@ -40,14 +40,18 @@ void controller::dext(Event x, double t) {
   if (x.port == 0){
     final_floor = input;
     sigma = 0;
+    output = 0;
   }
   else{
-    current_floor = input;
     if (input == final_floor){
+      current_floor = input;
       sigma = 0;
+      output = 0;
     }
     else{
+      current_floor = input;
       sigma = inf;
+      output = 0;
     }
   }
 }
@@ -61,18 +65,18 @@ Event controller::lambda(double t) {
 //     NroPort 1 = panel
   if (output == 0){
     if (current_floor < final_floor){
-      out_value = 1;
+      out_value = go_up;
       printLog("Controller output in port 0 value %i \n", out_value);
       return Event(&out_value,0);
     }
     else{
       if (current_floor > final_floor){
-        out_value = -1;
+        out_value = go_down;
         printLog("Controller output in port 0 value %i \n", out_value);
         return Event(&out_value,0);
       }
       else{
-        out_value = 0;
+        out_value = stop;
         printLog("Controller output in port 0 value %i \n", out_value);
         return Event(&out_value,0);
       }
@@ -80,12 +84,7 @@ Event controller::lambda(double t) {
   }
   else{
     if (current_floor == final_floor){
-      out_value = 0;
-      printLog("Controller output in port 1 value %i \n", out_value);
-      return Event(&out_value,1);
-    }
-    else{
-      out_value = 1;
+      out_value = vacant;
       printLog("Controller output in port 1 value %i \n", out_value);
       return Event(&out_value,1);
     }
