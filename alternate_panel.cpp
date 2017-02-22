@@ -20,11 +20,11 @@ double alternate_panel::ta(double t) {
 void alternate_panel::dint(double t) {
   sigma = 2;
   if (last == 2){
-    state_one = 1;
+    state_one = busy;
     last = 1;
   }
   else{
-    state_two = 1;
+    state_two = busy;
     last = 2;
   }
 }
@@ -41,17 +41,14 @@ void alternate_panel::dext(Event x, double t) {
   printLog("Panel input - floor %i in port %i at time %f\n", input, x.port, t);
   switch (x.port){
     case 0:
-      if (x.port == 0 && last == 2 && !floor_queue.empty()){
-        state_one = 0;
+      // controller_one && last_output = port_2
+      if (last == 2 && !floor_queue.empty()){
+        state_one = vacant;
         sigma = 0;
         break;
       }
-      if(x.port == 0 && (last == 1 || floor_queue.empty())){
-        state_one = 0;
-        sigma = inf;
-        break;
-      }if(x.port == 1){
-        state_one = 1;
+      if(last == 1 || floor_queue.empty()){
+        state_one = vacant;
         sigma = inf;
         break;
       }
@@ -60,28 +57,24 @@ void alternate_panel::dext(Event x, double t) {
       /*printLog("state one %i \n", state_one);
       printLog("state two %i \n", state_two);
       printLog("last %i \n", last);*/
-      if ((state_one == 0 && last == 2) || (state_two == 0 && last == 1)){
+      if ((state_one == vacant && last == 2) || (state_two == vacant && last == 1)){
         //printLog("Panel input - ESTOY AQUI 1 \n");
         sigma = 0;
         break;
       }
-      if ((state_one == 1 && last == 2) || (state_two == 1 && last == 1)){
+      if ((state_one == busy && last == 2) || (state_two == busy && last == 1)){
         //printLog("Panel input - ESTOY AQUI 2 \n");
         sigma = inf;
         break;
       }
     case 2:
-      if (x.port == 0 && last == 1 && !floor_queue.empty()){
-        state_two = 0;
+      if (last == 1 && !floor_queue.empty()){
+        state_two = vacant;
         sigma = 0;
         break;
       }
-      if(x.port == 0 && (last == 2 || floor_queue.empty())){
-        state_two = 0;
-        sigma = inf;
-        break;
-      }if(x.port == 1){
-        state_two = 1;
+      if(last == 2 || floor_queue.empty()){
+        state_two = vacant;
         sigma = inf;
         break;
       }
