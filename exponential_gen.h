@@ -27,6 +27,7 @@ double initValue;
 int seed;
 StochasticLib1 *time;
 int output;
+double lala;
 
 double deltaL;
 double vc;
