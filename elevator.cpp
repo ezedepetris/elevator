@@ -20,6 +20,8 @@ double elevator::ta(double t) {
 void elevator::dint(double t) {
    
   if (state == going_up){
+    printLog("ELEVATOR:INPUT - ACTION 'STOP' - TIME %f\n", t);
+
     current_floor++;
     distance_next_floor = 2;
     sigma = 2;
@@ -47,14 +49,16 @@ void elevator::dext(Event x, double t) {
       printLog("ELEVATOR:INPUT - ACTION 'GO UP' - TIME %f\n", t);
       distance_next_floor = 2;
       state = going_up;
-      sigma = 2;
+      sigma = 0;
     }
     if (input == go_down){
+		printLog("ELEVATOR:INPUT - ACTION 'GO DOWN' - TIME %f\n", t);
       distance_next_floor = 2;
       state = going_down;
-      sigma = 2;
+      sigma = 0;
     }
     if (input == stop){
+		printLog("ELEVATOR:INPUT - ACTION 'STOP' - TIME %f\n", t);
       distance_next_floor = 0;
       sigma = inf;
       state = stopped;      
@@ -68,7 +72,10 @@ void elevator::dext(Event x, double t) {
       state = stopped;
     }
     else{
+      printLog("ELEVATOR:INPUT - ACTION 'NONE' - TIME %f\n", t);
+
       distance_next_floor = distance_next_floor - 2*e;
+		sigma  = distance_next_floor - 2*e;
     }
   }
 }

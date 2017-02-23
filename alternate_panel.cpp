@@ -50,12 +50,12 @@ void alternate_panel::dext(Event x, double t) {
   switch (x.port){
     case 0:
       // controller_one && last_output = port_2
-      if (last == 2 && !floor_queue.empty()){
+      if (!floor_queue.empty()){
         state_one = vacant;
         sigma = 0;
         break;
       }
-      if(last == 1 || floor_queue.empty()){
+      if(floor_queue.empty()){
         state_one = vacant;
         sigma = inf;
         break;
@@ -71,17 +71,17 @@ void alternate_panel::dext(Event x, double t) {
         break;
       }
       if ((state_one == busy && last == 2) || (state_two == busy && last == 1)){
-        //printLog("Panel input - ESTOY AQUI 2 \n");
+        printLog("PANEL:INPUT:GENERATOR - 'WAIT' \n");
         sigma = inf;
         break;
       }
     case 2:
-      if (last == 1 && !floor_queue.empty()){
+      if (!floor_queue.empty()){
         state_two = vacant;
         sigma = 0;
         break;
       }
-      if(last == 2 || floor_queue.empty()){
+      if(floor_queue.empty()){
         state_two = vacant;
         sigma = inf;
         break;
@@ -100,8 +100,13 @@ Event alternate_panel::lambda(double t) {
 //     NroPort 1 = controller two
   output = floor_queue.front();
   floor_queue.pop();
-  printLog("PANEL:OUTPUT:CONTROLLER_%i - FLOOR %i - TIME %f \n", last, output, t);
-  return Event(&output,last-1);
+  if(last == 2){
+ 	 printLog("PANEL:OUTPUT:CONTROLLER_1 - FLOOR %i - TIME %f \n", output, t);
+	  return Event(&output,0);
+  }else{
+	  printLog("PANEL:OUTPUT:CONTROLLER_2 - FLOOR %i - TIME %f \n", output, t);
+	  return Event(&output,1);
+  }
 }
 void alternate_panel::exit() {
 //Code executed at the end of the simulation.
