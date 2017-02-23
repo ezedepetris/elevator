@@ -7,7 +7,10 @@ va_start(parameters,t);
 //where:
 //      %Name% is the parameter name
 //	%Type% is the parameter type
-
+state_one = vacant;
+state_two = vacant;
+sigma = 1e10;
+inf = 1e10;
 }
 double priority_panel::ta(double t) {
 //This function returns a double.
@@ -32,39 +35,49 @@ void priority_panel::dext(Event x, double t) {
 //     NroPort 1 = generator
 //     NroPort 2 = controller two
   int  input = *((int*)x.value);
-  printLog("Panel input - floor %i in port %i at time %f\n", input, x.port, t)
+  if (x.port == 1){
+    printLog("PANEL:INPUT:GENERATOR - FLOOR %i - TIME %f \n", input, t);
+  }
+  if (x.port == 0){
+    printLog("PANEL:INPUT:CONTROLLER_1 - VALUE 'VACANT' - TIME %f \n", t);
+  }
+  if (x.port == 2){
+    printLog("PANEL:INPUT:CONTROLLER_2 - VALUE 'VACANT' - TIME %f \n", t);
+  }
   switch (x.port){
     case 0:
-      state_one = x.value;
-      if (!floor_queue.empty() && (x.value == 0 || state_two == 0){
+      state_one = input;
+      if (!floor_queue.empty() && (input == 0 || state_two == 0)){
         sigma = 0;
       }
-      if (floor_queue.empty() || (x.value == 1 && state_two == 1){
-        sigma = INF;
+      if (floor_queue.empty() || (input == 1 && state_two == 1)){
+        sigma = inf;
       }
       break;
     case 1:
-      floor_queue.push(x.value);
-      if (state_one == 0) || (state_two == 0){
+      floor_queue.push(input);
+      if ((state_one == 0) || (state_two == 0)){
         sigma = 0;
       }
       else{
-        sigma = INF;
+        printLog("PANEL:INPUT:GENERATOR - 'WAIT' \n");
+        sigma = inf;
       }
       break;
     case 2:
-      state_two = x.value;
-      if (!floor_queue.empty() && (x.value == 0 || state_one == 0){
+      state_two = input;
+      if (!floor_queue.empty() && (input == 0 || state_one == 0)){
         sigma = 0;
       }
-      if (floor_queue.empty() || (x.value == 1 && state_one == 1){
-        sigma = INF;
+      if (floor_queue.empty() || (input == 1 && state_one == 1)){
+        sigma = inf;
       }
       break;
     default:
       break;
     }
-  }
+  
+}
 Event priority_panel::lambda(double t) {
 //This function returns an Event:
 //     Event(%&Value%, %NroPort%)
@@ -73,11 +86,14 @@ Event priority_panel::lambda(double t) {
 //     %NroPort% is the port number (from 0 to n-1)
 //     NroPort 0 = elevator one
 //     NroPort 1 = elevator two
-  output = floor_queue.pop();
+  output = floor_queue.front();
+  floor_queue.pop();
   if (state_one == 0){
+    printLog("PANEL:OUTPUT:CONTROLLER_1 - FLOOR %i - TIME %f \n", output, t);
     return Event(&output,0);
   }
   else{
+    printLog("PANEL:OUTPUT:CONTROLLER_2 - FLOOR %i - TIME %f \n", output, t);
     return Event(&output,1);
   }
 }

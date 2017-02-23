@@ -1,22 +1,24 @@
-//CPP:continuous_system/codes/priority_panel/priority_panel.cpp
+//CPP:elevator/priority_panel.cpp
 #if !defined priority_panel_h
 #define priority_panel_h
 
 #include "simulator.h"
 #include "event.h"
 #include "stdarg.h"
-#include <queue>
+
+#include "queue"
+#include "elevator/constants.h"
 
 
-
-class priority_panel: public Simulator {
+class priority_panel: public Simulator { 
 // Declare the state,
 // output variables
 // and parameters
   std::queue<int> floor_queue;
-  int state_one = 0;
-  int state_two = 0;
-  int sigma = INF;
+  int state_one;
+  int state_two;
+  double sigma;
+  double inf;
   int output;
 
 public:

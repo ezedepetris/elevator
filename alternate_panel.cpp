@@ -7,8 +7,8 @@ va_start(parameters,t);
 //where:
 //      %Name% is the parameter name
 //	%Type% is the parameter type
-state_one = 0;
-state_two = 0;
+state_one = vacant;
+state_two = vacant;
 last = 2;
 sigma = 1e10;
 inf = 1e10;
