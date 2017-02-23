@@ -13,9 +13,9 @@ initValue = va_arg(parameters, double);
 seed = (int)va_arg(parameters, double);
 vc = va_arg(parameters, double);
 deltaL = va_arg(parameters, double);
-
+lala = 0.9;
 time = new StochasticLib1(76);
-sigma = time -> exponential(9);
+sigma = time -> exponential(lala);
 y = "ARRIVE";
 }
 double exponential_gen::ta(double t) {
@@ -23,7 +23,7 @@ double exponential_gen::ta(double t) {
 return sigma;
 }
 void exponential_gen::dint(double t) {
-sigma = time -> exponential(9);
+sigma = time -> exponential(lala);
 output = time -> uniform(0,9);
 
 }

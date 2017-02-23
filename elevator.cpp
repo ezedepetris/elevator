@@ -43,14 +43,21 @@ void elevator::dext(Event x, double t) {
   int input = *((int*)x.value);
   
   if (state == stopped){
-    distance_next_floor = 2;
-    sigma = 2;
     if (input == go_up){
       printLog("ELEVATOR:INPUT - ACTION 'GO UP' - TIME %f\n", t);
+      distance_next_floor = 2;
       state = going_up;
+      sigma = 2;
     }
     if (input == go_down){
+      distance_next_floor = 2;
       state = going_down;
+      sigma = 2;
+    }
+    if (input == stop){
+      distance_next_floor = 0;
+      sigma = inf;
+      state = stopped;      
     }
   }
   else{
