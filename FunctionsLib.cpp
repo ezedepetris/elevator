@@ -7,7 +7,8 @@
 #include <stdexcept>
 
 using namespace std;
-
-double Add(int a, int b){
-    return a + b;
+namespace Elevator{
+  double Fuctions::Add(int a, int b){
+      return a + b;
+  }
 }

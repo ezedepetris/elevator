@@ -50,9 +50,9 @@ void heuristics_panel::dext(Event x, double t) {
 //     NroPort 0 = controller_one
 //     NroPort 1 = generator
 //     NroPort 2 = controller two
-  printLog("TESTING FUCTIONS LIBRARY  %i \n", Add(1, 2));
-  printLog("TESTING FUCTIONS LIBRARY  %i \n", Add(1, 2));
-  printLog("TESTING FUCTIONS LIBRARY  %i \n", Add(1, 2));
+  printLog("TESTING FUCTIONS LIBRARY  %i \n", Elevator::Fuctions::Add(1, 2));
+  printLog("TESTING FUCTIONS LIBRARY  %i \n", Elevator::Fuctions::Add(1, 2));
+  printLog("TESTING FUCTIONS LIBRARY  %i \n", Elevator::Fuctions::Add(1, 2));
 
 
 
@@ -68,13 +68,13 @@ void heuristics_panel::dext(Event x, double t) {
   }
   switch (x.port){
     case 0:
-      if (!floor_queue.empty() && Add(1, 0) == 1){
+      if (!floor_queue.empty() && Elevator::Fuctions::Add(1, 0) == 1){
         output_port = 1;
         state_one = vacant;
         sigma = 0;
         break;
       }
-      if(floor_queue.empty() || (!floor_queue.empty() && Add(1, 0) == 2)){
+      if(floor_queue.empty() || (!floor_queue.empty() && Elevator::Fuctions::Add(1, 0) == 2)){
         state_one = vacant;
         sigma = inf;
         break;
@@ -84,25 +84,25 @@ void heuristics_panel::dext(Event x, double t) {
       /*printLog("state one %i \n", state_one);
       printLog("state two %i \n", state_two);
       printLog("last %i \n", last);*/
-      if ((state_one == vacant && Add(1, 0) == 1) || (state_two == vacant && Add(1, 0) == 2)){
+      if ((state_one == vacant && Elevator::Fuctions::Add(1, 0) == 1) || (state_two == vacant && Elevator::Fuctions::Add(1, 0) == 2)){
         //printLog("Panel input - ESTOY AQUI 1 \n");
-        output_port = Add(1, 0);
+        output_port = Elevator::Fuctions::Add(1, 0);
         sigma = 0;
         break;
       }
-      if ((state_one == busy && Add(1, 0) == 1) || (state_two == busy && Add(1, 0) == 2)){
+      if ((state_one == busy && Elevator::Fuctions::Add(1, 0) == 1) || (state_two == busy && Elevator::Fuctions::Add(1, 0) == 2)){
         printLog("PANEL:INPUT:GENERATOR - 'WAIT' \n");
         sigma = inf;
         break;
       }
     case 2:
-      if (!floor_queue.empty() && Add(1, 0) == 2){
+      if (!floor_queue.empty() && Elevator::Fuctions::Add(1, 0) == 2){
         output_port = 2;
         state_two = vacant;
         sigma = 0;
         break;
       }
-      if(floor_queue.empty() || (!floor_queue.empty() && Add(1, 0) == 1)){
+      if(floor_queue.empty() || (!floor_queue.empty() && Elevator::Fuctions::Add(1, 0) == 1)){
         state_two = vacant;
         sigma = inf;
         break;

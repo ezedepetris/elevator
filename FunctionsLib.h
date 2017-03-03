@@ -1,7 +1,9 @@
 // Functions.h
 
-class Functions{
-    public:
-        // Returns a + b
-        static double Add(int a, int b);
-};
+namespace Elevator{
+  class Functions{
+      public:
+          // Returns a + b
+          static double Add(int a, int b);
+  };
+}
