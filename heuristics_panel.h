@@ -11,7 +11,6 @@
 #include "elevator/FunctionsLib.h"
 
 
-
 class heuristics_panel: public Simulator { 
 // Declare the state,
 // output variables

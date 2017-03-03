@@ -15,8 +15,4 @@
 	static const int vacant     = 0;
 	static const int busy       = 1;
 
-	int Add(int a, int b){
-	    return a + b;
-	}
-
 #endif

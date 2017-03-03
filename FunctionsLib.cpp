@@ -8,7 +8,7 @@
 
 using namespace std;
 namespace Elevator{
-  double Fuctions::Add(int a, int b){
+  int Functions::Add(int a, int b){
       return a + b;
   }
 }
