@@ -119,7 +119,7 @@ Coupled
             {
             Name = panel
             Ports = 3 ; 2
-            Path = elevator/priority_panel.h
+            Path = elevator/heuristics_panel.h
             Description = Atomic DEVS model
             Graphic
                 {

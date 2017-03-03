@@ -27,7 +27,7 @@ Root-Coordinator
    }
   Simulator
    {
-    Path = elevator/priority_panel.h
+    Path = elevator/heuristics_panel.h
     Parameters = 
    }
   Simulator

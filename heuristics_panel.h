@@ -8,8 +8,7 @@
 
 #include "queue"
 #include "elevator/constants.h"
-#include "elevator/Functions.h"
-#include "Functions.h"
+
 
 
 class heuristics_panel: public Simulator { 

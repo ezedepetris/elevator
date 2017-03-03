@@ -2,7 +2,7 @@
 // compile with: cl /c /EHsc MathFuncsLib.cpp
 // post-build command: lib MathFuncsLib.obj
 
-#include "Functions.h"
+#include "FunctionsLib.h"
 
 #include <stdexcept>
 
