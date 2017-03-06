@@ -5,12 +5,18 @@
 #include "FunctionsLib.h"
 #include "elevator/constants.h"
 #include <stdexcept>
+#include <cmath>
 
 using namespace std;
 namespace Elevator{
   double Functions::TimeToDestiny(int origin_floor, int destiny_floor, double time_sended, double time_now){
-    double avanced_floor = (time_now - time_sended) * 2;
-    double floors_to_destiny = destiny_floor - (origin_floor - avanced_floor);
+    double avanced_floor = (time_now - time_sended) / 2;
+    double floors_to_destiny;
+    if (origin_floor < destiny_floor){
+      floors_to_destiny = destiny_floor - (origin_floor + avanced_floor);
+    }else{
+      floors_to_destiny = (origin_floor - avanced_floor) - destiny_floor;  
+    }    
     return floors_to_destiny * 2;
   }
   
@@ -24,29 +30,29 @@ namespace Elevator{
   	// t1 = time to controller one came out
   	// t2 = time to controller one came out
   	// floor = request floor
-    if ((est1 = vacant) && (est2 = vacant)){
-    	if ((2*(floor-of1))<=(2*(floor-of2))){
+    if ((est1 == vacant) && (est2 == vacant)){
+    	if ((2*std::abs(floor-of1)) <= (2*std::abs(floor-of2))){
     		return 1;
     	}else{
     		return 2;
     	}
     }
-    if ((est1 = vacant) && (est2 = busy)){
-    	if ((2*(floor-of1))<=(TimeToDestiny(of2,ff2,t2,t)+2*(floor-of2))){
+    if ((est1 == vacant) && (est2 == busy)){
+    	if ((2*std::abs(floor-of1)) <= (TimeToDestiny(of2,ff2,t2,t)+2*std::abs(floor-ff2))){
     		return 1;
     	}else{
     		return 2;
     	}	
     }
-    if ((est1 = busy) && (est2 = vacant)){
-    	if ((TimeToDestiny(of1,ff1,t1,t)+2*(floor-of1))<=(2*(floor-of2))){
+    if ((est1 == busy) && (est2 == vacant)){
+    	if ((TimeToDestiny(of1,ff1,t1,t)+2*std::abs(floor-ff1)) <= (2*std::abs(floor-of2))){
     		return 1;
     	}else{
     		return 2;
     	}
     }
-    if ((est1 = busy) && (est2 = busy)){
-    	if ((TimeToDestiny(of1,ff1,t1,t)+2*(floor-of1))<=(TimeToDestiny(of2,ff2,t2,t)+2*(floor-of2))){
+    if ((est1 == busy) && (est2 == busy)){
+    	if ((TimeToDestiny(of1,ff1,t1,t)+2*std::abs(floor-ff1)) <= (TimeToDestiny(of2,ff2,t2,t)+2*std::abs(floor-ff2))){
     		return 1;
     	}else{
     		return 2;

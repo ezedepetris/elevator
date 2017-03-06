@@ -26,7 +26,7 @@ double heuristics_panel::ta(double t) {
 void heuristics_panel::dint(double t) {
   sigma = inf;
 
-  if (output_port == 0){
+  if (output_port == 1){
     state_one = busy;
     origin_floor_one = destination_floor_one;
     destination_floor_one = floor_queue.front();  
@@ -70,15 +70,18 @@ void heuristics_panel::dext(Event x, double t) {
       if (!floor_queue.empty() && Elevator::Functions::ChooseController(vacant,state_two,destination_floor_one,origin_floor_two,destination_floor_one,destination_floor_two,t,time_two,floor_queue.front(),t) == 1){
         output_port = 1;
         state_one = vacant;
-		  origin_floor_one = destination_floor_one;
-		  time_one = t;
+  		  origin_floor_one = destination_floor_one;
+  		  time_one = t;
         sigma = 0;
         break;
       }
       if(floor_queue.empty() || (!floor_queue.empty() && Elevator::Functions::ChooseController(vacant,state_two,destination_floor_one,origin_floor_two,destination_floor_one,destination_floor_two,t,time_two,floor_queue.front(),t) == 2)){
+        printLog("ME CLAVE ACA \n");
+        printLog("QUEUE empty %i \n", floor_queue.empty());
+        printLog("QUEUE empty %i \n", 1==1);
         state_one = vacant;
-		  origin_floor_one = destination_floor_one;
-		  time_one = t;
+  		  origin_floor_one = destination_floor_one;
+  		  time_one = t;
         sigma = inf;
         break;
       }
@@ -102,15 +105,15 @@ void heuristics_panel::dext(Event x, double t) {
       if (!floor_queue.empty() && Elevator::Functions::ChooseController(state_one,vacant,origin_floor_one,destination_floor_two,destination_floor_one,destination_floor_two,time_one,t,floor_queue.front(),t) == 2){
         output_port = 2;
         state_two = vacant;
-		  origin_floor_two = destination_floor_two;
-		  time_two = t;
+  		  origin_floor_two = destination_floor_two;
+  		  time_two = t;
         sigma = 0;
         break;
       }
       if(floor_queue.empty() || (!floor_queue.empty() && Elevator::Functions::ChooseController(state_one,vacant,origin_floor_one,destination_floor_two,destination_floor_one,destination_floor_two,time_one,t,floor_queue.front(),t) == 1)){
         state_two = vacant;
-		  origin_floor_two = destination_floor_two;
-		  time_two = t;
+  		  origin_floor_two = destination_floor_two;
+  		  time_two = t;
         sigma = inf;
         break;
       }
