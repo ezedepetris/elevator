@@ -25,21 +25,20 @@ double heuristics_panel::ta(double t) {
 }
 void heuristics_panel::dint(double t) {
   sigma = inf;
-  int output;
-  output = floor_queue.front();
-  floor_queue.pop();
+
   if (output_port == 0){
     state_one = busy;
     origin_floor_one = destination_floor_one;
-    destination_floor_one = output;  
+    destination_floor_one = floor_queue.front();  
     time_one = t;
   }
   else{
     state_two = busy;
     origin_floor_two = destination_floor_two;
-    destination_floor_two = output;  
+    destination_floor_two = floor_queue.front();  
     time_two = t;
   }
+  floor_queue.pop();
 }
 void heuristics_panel::dext(Event x, double t) {
 //The input event is in the 'x' variable.
@@ -127,10 +126,9 @@ Event heuristics_panel::lambda(double t) {
 //     %NroPort% is the port number (from 0 to n-1)
 //     NroPort 0 = controller one
 //     NroPort 1 = controller two
-	int floor;
-  floor = floor_queue.front();
-  printLog("PANEL:OUTPUT:CONTROLLER_%i - FLOOR %i - TIME %f \n", output_port, floor, t);
-  return Event(&floor,output_port-1);
+
+  printLog("PANEL:OUTPUT:CONTROLLER_%i - FLOOR %i - TIME %f \n", output_port, floor_queue.front(), t);
+  return Event(&floor_queue.front(),output_port-1);
 }
 void heuristics_panel::exit() {
 //Code executed at the end of the simulation.
