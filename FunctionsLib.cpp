@@ -8,7 +8,7 @@
 
 using namespace std;
 namespace Elevator{
-  double TimeToDestiny(int origin_floor, int destiny_floor, double time_sended, double time_now){
+  double Functions::TimeToDestiny(int origin_floor, int destiny_floor, double time_sended, double time_now){
     double avanced_floor = (time_now - time_sended) * 2;
     double floors_to_destiny = destiny_floor - (origin_floor - avanced_floor);
     return floors_to_destiny * 2;
