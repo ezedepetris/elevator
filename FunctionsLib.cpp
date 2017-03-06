@@ -26,32 +26,32 @@ namespace Elevator{
   	// floor = request floor
     if ((est1 = vacant) && (est2 = vacant)){
     	if ((2*(floor-of1))<=(2*(floor-of2))){
-    		return 0;
-    	}else{
     		return 1;
+    	}else{
+    		return 2;
     	}
     }
     if ((est1 = vacant) && (est2 = busy)){
     	if ((2*(floor-of1))<=(TimeToDestiny(of2,ff2,t2,t)+2*(floor-of2))){
-    		return 0;
-    	}else{
     		return 1;
+    	}else{
+    		return 2;
     	}	
     }
     if ((est1 = busy) && (est2 = vacant)){
     	if ((TimeToDestiny(of1,ff1,t1,t)+2*(floor-of1))<=(2*(floor-of2))){
-    		return 0;
-    	}else{
     		return 1;
+    	}else{
+    		return 2;
     	}
     }
     if ((est1 = busy) && (est2 = busy)){
     	if ((TimeToDestiny(of1,ff1,t1,t)+2*(floor-of1))<=(TimeToDestiny(of2,ff2,t2,t)+2*(floor-of2))){
-    		return 0;
-    	}else{
     		return 1;
+    	}else{
+    		return 2;
     	}
     }
-    return 0;
+    return 1;
   }	
 }
