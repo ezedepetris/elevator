@@ -7,11 +7,11 @@ va_start(parameters,t);
 //where:
 //      %Name% is the parameter name
 //	%Type% is the parameter type
-current_floor = 1;
-state = 0; // { -1 down, 0 stop, 1 up}
+current_floor = 1.0;
+state = 0.0; // { -1 down, 0 stop, 1 up}
 sigma = 1e10;
 inf = 1e10;
-output = 0;
+output = 0.0;
 }
 double elevator::ta(double t) {
 //This function returns a double.
@@ -23,16 +23,16 @@ void elevator::dint(double t) {
     printLog("ELEVATOR:INPUT - ACTION 'STOP' - TIME %f\n", t);
 
     current_floor++;
-    distance_next_floor = 2;
-    sigma = 2;
+    distance_next_floor = 2.0;
+    sigma = 2.0;
   }
   if (state == going_down){
     current_floor--;
-    distance_next_floor = 2;
-    sigma = 2;
+    distance_next_floor = 2.0;
+    sigma = 2.0;
   }
   if (state == stopped){
-    distance_next_floor = 2;
+    distance_next_floor = 2.0;
     sigma = inf;
   }
 }
@@ -47,19 +47,19 @@ void elevator::dext(Event x, double t) {
   if (state == stopped){
     if (input == go_up){
       printLog("ELEVATOR:INPUT - ACTION 'GO UP' - TIME %f\n", t);
-      distance_next_floor = 2;
+      distance_next_floor = 2.0;
       state = going_up;
-      sigma = 0;
+      sigma = 0.0;
     }
     if (input == go_down){
-		printLog("ELEVATOR:INPUT - ACTION 'GO DOWN' - TIME %f\n", t);
-      distance_next_floor = 2;
+		  printLog("ELEVATOR:INPUT - ACTION 'GO DOWN' - TIME %f\n", t);
+      distance_next_floor = 2.0;
       state = going_down;
-      sigma = 0;
+      sigma = 0.0;
     }
     if (input == stop){
-		printLog("ELEVATOR:INPUT - ACTION 'STOP' - TIME %f\n", t);
-      distance_next_floor = 0;
+		  printLog("ELEVATOR:INPUT - ACTION 'STOP' - TIME %f\n", t);
+      distance_next_floor = 0.0;
       sigma = inf;
       state = stopped;      
     }
@@ -67,7 +67,7 @@ void elevator::dext(Event x, double t) {
   else{
     if (input == stop){
       printLog("ELEVATOR:INPUT - ACTION 'STOP' - TIME %f\n", t);
-      distance_next_floor = 0;
+      distance_next_floor = 0.0;
       sigma = inf;
       state = stopped;
     }
@@ -75,7 +75,7 @@ void elevator::dext(Event x, double t) {
       printLog("ELEVATOR:INPUT - ACTION 'NONE' - TIME %f\n", t);
 
       distance_next_floor = distance_next_floor - 2*e;
-		sigma  = distance_next_floor - 2*e;
+		  sigma  = distance_next_floor - 2*e;
     }
   }
 }

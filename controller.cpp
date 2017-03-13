@@ -7,23 +7,23 @@ va_start(parameters,t);
 //where:
 //      %Name% is the parameter name
 //	%Type% is the parameter type
-current_floor = 1;
+current_floor = 1.0;
 sigma = 1e10;
 inf = 1e10;
-output = 0;
+output = 0.0;
 }
 double controller::ta(double t) {
 //This function returns a double.
   return sigma;
 }
 void controller::dint(double t) {
-  if (output == 0){
-    sigma  = 0;
-    output = 1;
+  if (output == 0.0){
+    sigma  = 0.0;
+    output = 1.0;
   }
   else{
     sigma  = inf;
-    output = 0;
+    output = 0.0;
   }
 }
 void controller::dext(Event x, double t) {
@@ -35,27 +35,27 @@ void controller::dext(Event x, double t) {
 //     NroPort 0 = panel
 //     NroPort 1 = elevator
   double  input = *((double*)x.value);
-  if (x.port == 0){
+  if (x.port == 0.0){
     printLog("CONTROLLER:INPUT:PANEL - FLOOR %f - TIME %f \n", input, t);
   }else{
     printLog("CONTROLLER:INPUT:ELEVATOR - FLOOR %f - TIME %f \n", input, x.port, t);
   }
   
-  if (x.port == 0){
+  if (x.port == 0.0){
     final_floor = input;
-    sigma = 0;
-    output = 0;
+    sigma = 0.0;
+    output = 0.0;
   }
   else{
     if (input == final_floor){
       current_floor = input;
-      sigma = 0;
-      output = 0;
+      sigma = 0.0;
+      output = 0.0;
     }
     else{
       current_floor = input;
       sigma = inf;
-      output = 0;
+      output = 0.0;
     }
   }
 }
@@ -67,7 +67,7 @@ Event controller::lambda(double t) {
 //     %NroPort% is the port number (from 0 to n-1)
 //     NroPort 0 = elevator
 //     NroPort 1 = panel
-  if (output == 0){
+  if (output == 0.0){
     if (current_floor < final_floor){
       out_value = go_up;
       printLog("CONTROLLER:OUTPUT:ELEVATOR -  VALUE 'GO UP' - TIME %f\n", t);

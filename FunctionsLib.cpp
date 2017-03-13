@@ -17,7 +17,7 @@ namespace Elevator{
     }else{
       floors_to_destiny = (origin_floor - avanced_floor) - destiny_floor;  
     }    
-    return floors_to_destiny * 2;
+    return floors_to_destiny * 2.0;
   }
   
   double Functions::ChooseController(double est1, double est2, double of1, double of2, double ff1, double ff2, double t1, double t2, double floor, double t){
@@ -32,32 +32,32 @@ namespace Elevator{
   	// floor = request floor
     if ((est1 == vacant) && (est2 == vacant)){
     	if ((2*std::abs(floor-of1)) <= (2*std::abs(floor-of2))){
-    		return 1;
+    		return 1.0;
     	}else{
-    		return 2;
+    		return 2.0;
     	}
     }
     if ((est1 == vacant) && (est2 == busy)){
     	if ((2*std::abs(floor-of1)) <= (TimeToDestiny(of2,ff2,t2,t)+2*std::abs(floor-ff2))){
-    		return 1;
+    		return 1.0;
     	}else{
-    		return 2;
+    		return 2.0;
     	}	
     }
     if ((est1 == busy) && (est2 == vacant)){
     	if ((TimeToDestiny(of1,ff1,t1,t)+2*std::abs(floor-ff1)) <= (2*std::abs(floor-of2))){
-    		return 1;
+    		return 1.0;
     	}else{
-    		return 2;
+    		return 2.0;
     	}
     }
     if ((est1 == busy) && (est2 == busy)){
     	if ((TimeToDestiny(of1,ff1,t1,t)+2*std::abs(floor-ff1)) <= (TimeToDestiny(of2,ff2,t2,t)+2*std::abs(floor-ff2))){
-    		return 1;
+    		return 1.0;
     	}else{
-    		return 2;
+    		return 2.0;
     	}
     }
-    return 1;
+    return 1.0;
   }	
 }
