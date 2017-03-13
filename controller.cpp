@@ -36,9 +36,9 @@ void controller::dext(Event x, double t) {
 //     NroPort 1 = elevator
   double  input = *((double*)x.value);
   if (x.port == 0){
-    printLog("CONTROLLER:INPUT:PANEL - FLOOR %i - TIME %f \n", input, t);
+    printLog("CONTROLLER:INPUT:PANEL - FLOOR %f - TIME %f \n", input, t);
   }else{
-    printLog("CONTROLLER:INPUT:ELEVATOR - FLOOR %i - TIME %f \n", input, x.port, t);
+    printLog("CONTROLLER:INPUT:ELEVATOR - FLOOR %f - TIME %f \n", input, x.port, t);
   }
   
   if (x.port == 0){

@@ -49,15 +49,15 @@ void heuristics_panel::dext(Event x, double t) {
 //     NroPort 0 = controller_one
 //     NroPort 1 = generator
 //     NroPort 2 = controller two
-  // printLog("TESTING FUCTIONS LIBRARY  %i \n", Elevator::Functions::ChooseController(state_one,state_two,origin_floor_one,origin_floor_two,destination_floor_one,destination_floor_two,time_one,time_two,floor_queue.front(),t));
-  // printLog("TESTING FUCTIONS LIBRARY  %i \n", Elevator::Functions::ChooseController(state_one,state_two,origin_floor_one,origin_floor_two,destination_floor_one,destination_floor_two,time_one,time_two,floor_queue.front(),t));
-  // printLog("TESTING FUCTIONS LIBRARY  %i \n", Elevator::Functions::ChooseController(state_one,state_two,origin_floor_one,origin_floor_two,destination_floor_one,destination_floor_two,time_one,time_two,floor_queue.front(),t));
+  // printLog("TESTING FUCTIONS LIBRARY  %f \n", Elevator::Functions::ChooseController(state_one,state_two,origin_floor_one,origin_floor_two,destination_floor_one,destination_floor_two,time_one,time_two,floor_queue.front(),t));
+  // printLog("TESTING FUCTIONS LIBRARY  %f \n", Elevator::Functions::ChooseController(state_one,state_two,origin_floor_one,origin_floor_two,destination_floor_one,destination_floor_two,time_one,time_two,floor_queue.front(),t));
+  // printLog("TESTING FUCTIONS LIBRARY  %f \n", Elevator::Functions::ChooseController(state_one,state_two,origin_floor_one,origin_floor_two,destination_floor_one,destination_floor_two,time_one,time_two,floor_queue.front(),t));
 
 
 
   double  input = *((double*)x.value);
   if (x.port == 1){
-    printLog("PANEL:INPUT:GENERATOR - FLOOR %i - TIME %f \n", input, t);
+    printLog("PANEL:INPUT:GENERATOR - FLOOR %f - TIME %f \n", input, t);
   }
   if (x.port == 0){
     printLog("PANEL:INPUT:CONTROLLER_1 - VALUE 'VACANT' - TIME %f \n", t);
@@ -77,8 +77,8 @@ void heuristics_panel::dext(Event x, double t) {
       }
       if(floor_queue.empty() || (!floor_queue.empty() && Elevator::Functions::ChooseController(vacant,state_two,destination_floor_one,origin_floor_two,destination_floor_one,destination_floor_two,t,time_two,floor_queue.front(),t) == 2)){
         printLog("ME CLAVE ACA \n");
-        printLog("QUEUE empty %i \n", floor_queue.empty());
-        printLog("QUEUE empty %i \n", 1==1);
+        printLog("QUEUE empty %f \n", floor_queue.empty());
+        printLog("QUEUE empty %f \n", 1==1);
         state_one = vacant;
   		  origin_floor_one = destination_floor_one;
   		  time_one = t;
@@ -87,9 +87,9 @@ void heuristics_panel::dext(Event x, double t) {
       }
     case 1:
       floor_queue.push(input);
-      /*printLog("state one %i \n", state_one);
-      printLog("state two %i \n", state_two);
-      printLog("last %i \n", last);*/
+      /*printLog("state one %f \n", state_one);
+      printLog("state two %f \n", state_two);
+      printLog("last %f \n", last);*/
       if ((state_one == vacant && Elevator::Functions::ChooseController(state_one,state_two,origin_floor_one,origin_floor_two,destination_floor_one,destination_floor_two,time_one,time_two,floor_queue.front(),t) == 1) || (state_two == vacant && Elevator::Functions::ChooseController(state_one,state_two,origin_floor_one,origin_floor_two,destination_floor_one,destination_floor_two,time_one,time_two,floor_queue.front(),t) == 2)){
         //printLog("Panel input - ESTOY AQUI 1 \n");
         output_port = Elevator::Functions::ChooseController(state_one,state_two,origin_floor_one,origin_floor_two,destination_floor_one,destination_floor_two,time_one,time_two,floor_queue.front(),t);
@@ -130,7 +130,7 @@ Event heuristics_panel::lambda(double t) {
 //     NroPort 0 = controller one
 //     NroPort 1 = controller two
 
-  printLog("PANEL:OUTPUT:CONTROLLER_%i - FLOOR %i - TIME %f \n", output_port, floor_queue.front(), t);
+  printLog("PANEL:OUTPUT:CONTROLLER_%f - FLOOR %f - TIME %f \n", output_port, floor_queue.front(), t);
   return Event(&floor_queue.front(),output_port-1);
 }
 void heuristics_panel::exit() {

@@ -36,7 +36,7 @@ void priority_panel::dext(Event x, double t) {
 //     NroPort 2 = controller two
   int  input = *((int*)x.value);
   if (x.port == 1){
-    printLog("PANEL:INPUT:GENERATOR - FLOOR %i - TIME %f \n", input, t);
+    printLog("PANEL:INPUT:GENERATOR - FLOOR %f - TIME %f \n", input, t);
   }
   if (x.port == 0){
     printLog("PANEL:INPUT:CONTROLLER_1 - VALUE 'VACANT' - TIME %f \n", t);
@@ -89,11 +89,11 @@ Event priority_panel::lambda(double t) {
   output = floor_queue.front();
   floor_queue.pop();
   if (state_one == 0){
-    printLog("PANEL:OUTPUT:CONTROLLER_1 - FLOOR %i - TIME %f \n", output, t);
+    printLog("PANEL:OUTPUT:CONTROLLER_1 - FLOOR %f - TIME %f \n", output, t);
     return Event(&output,0);
   }
   else{
-    printLog("PANEL:OUTPUT:CONTROLLER_2 - FLOOR %i - TIME %f \n", output, t);
+    printLog("PANEL:OUTPUT:CONTROLLER_2 - FLOOR %f - TIME %f \n", output, t);
     return Event(&output,1);
   }
 }

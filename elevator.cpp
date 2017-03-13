@@ -87,7 +87,7 @@ Event elevator::lambda(double t) {
 //     %NroPort% is the port number (from 0 to n-1)
 //     NroPort 0 = controller
 //     NroPort 1 = gnuplot
-  printLog("ELEVATOR:OUTPUT - FLOOR %i - TIME %f \n", current_floor, t);
+  printLog("ELEVATOR:OUTPUT - FLOOR %f - TIME %f \n", current_floor, t);
   return Event(&current_floor,0);
 }
 void elevator::exit() {

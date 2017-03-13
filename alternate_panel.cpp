@@ -39,7 +39,7 @@ void alternate_panel::dext(Event x, double t) {
 //     NroPort 2 = controller two
   int  input = *((int*)x.value);
   if (x.port == 1){
-    printLog("PANEL:INPUT:GENERATOR - FLOOR %i - TIME %f \n", input, t);
+    printLog("PANEL:INPUT:GENERATOR - FLOOR %f - TIME %f \n", input, t);
   }
   if (x.port == 0){
     printLog("PANEL:INPUT:CONTROLLER_1 - VALUE 'VACANT' - TIME %f \n", t);
@@ -62,9 +62,9 @@ void alternate_panel::dext(Event x, double t) {
       }
     case 1:
       floor_queue.push(input);
-      /*printLog("state one %i \n", state_one);
-      printLog("state two %i \n", state_two);
-      printLog("last %i \n", last);*/
+      /*printLog("state one %f \n", state_one);
+      printLog("state two %f \n", state_two);
+      printLog("last %f \n", last);*/
       if ((state_one == vacant && last == 2) || (state_two == vacant && last == 1)){
         //printLog("Panel input - ESTOY AQUI 1 \n");
         sigma = 0;
@@ -101,10 +101,10 @@ Event alternate_panel::lambda(double t) {
   output = floor_queue.front();
   floor_queue.pop();
   if(last == 2){
- 	 printLog("PANEL:OUTPUT:CONTROLLER_1 - FLOOR %i - TIME %f \n", output, t);
+ 	 printLog("PANEL:OUTPUT:CONTROLLER_1 - FLOOR %f - TIME %f \n", output, t);
 	  return Event(&output,0);
   }else{
-	  printLog("PANEL:OUTPUT:CONTROLLER_2 - FLOOR %i - TIME %f \n", output, t);
+	  printLog("PANEL:OUTPUT:CONTROLLER_2 - FLOOR %f - TIME %f \n", output, t);
 	  return Event(&output,1);
   }
 }
