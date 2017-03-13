@@ -47,47 +47,46 @@ void alternate_panel::dext(Event x, double t) {
   if (x.port == 2.0){
     printLog("PANEL:INPUT:CONTROLLER_2 - VALUE 'VACANT' - TIME %f \n", t);
   }
-  switch (x.port){
-    case 0.0:
-      // controller_one && last_output = port_2
-      if (!floor_queue.empty()){
-        state_one = vacant;
-        sigma = 0.0;
-        break;
-      }
-      if(floor_queue.empty()){
-        state_one = vacant;
-        sigma = inf;
-        break;
-      }
-    case 1.0:
-      floor_queue.push(input);
-      /*printLog("state one %f \n", state_one);
-      printLog("state two %f \n", state_two);
-      printLog("last %f \n", last);*/
-      if ((state_one == vacant && last == 2.0) || (state_two == vacant && last == 1.0)){
-        //printLog("Panel input - ESTOY AQUI 1 \n");
-        sigma = 0.0;
-        break;
-      }
-      if ((state_one == busy && last == 2.0) || (state_two == busy && last == 1.0)){
-        printLog("PANEL:INPUT:GENERATOR - 'WAIT' \n");
-        sigma = inf;
-        break;
-      }
-    case 2.0:
-      if (!floor_queue.empty()){
-        state_two = vacant;
-        sigma = 0.0;
-        break;
-      }
-      if(floor_queue.empty()){
-        state_two = vacant;
-        sigma = inf;
-        break;
-      }
-    default:
-    break;
+  if (x.port == 0.0){
+    // controller_one && last_output = port_2
+    if (!floor_queue.empty()){
+      state_one = vacant;
+      sigma = 0.0;
+      break;
+    }
+    if(floor_queue.empty()){
+      state_one = vacant;
+      sigma = inf;
+      break;
+    }
+  }
+  if (x.port == 1.0){
+    floor_queue.push(input);
+    /*printLog("state one %f \n", state_one);
+    printLog("state two %f \n", state_two);
+    printLog("last %f \n", last);*/
+    if ((state_one == vacant && last == 2.0) || (state_two == vacant && last == 1.0)){
+      //printLog("Panel input - ESTOY AQUI 1 \n");
+      sigma = 0.0;
+      break;
+    }
+    if ((state_one == busy && last == 2.0) || (state_two == busy && last == 1.0)){
+      printLog("PANEL:INPUT:GENERATOR - 'WAIT' \n");
+      sigma = inf;
+      break;
+    }
+  }
+  if (x.port == 2.0){
+    if (!floor_queue.empty()){
+      state_two = vacant;
+      sigma = 0.0;
+      break;
+    }
+    if(floor_queue.empty()){
+      state_two = vacant;
+      sigma = inf;
+      break;
+    }
   }
 }
 Event alternate_panel::lambda(double t) {

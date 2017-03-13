@@ -44,38 +44,35 @@ void priority_panel::dext(Event x, double t) {
   if (x.port == 2.0){
     printLog("PANEL:INPUT:CONTROLLER_2 - VALUE 'VACANT' - TIME %f \n", t);
   }
-  switch (x.port){
-    case 0.0:
-      state_one = input;
-      if (!floor_queue.empty() && (input == 0.0 || state_two == 0.0)){
-        sigma = 0;
-      }
-      if (floor_queue.empty() || (input == 1.0 && state_two == 1.0)){
-        sigma = inf;
-      }
-      break;
-    case 1.0:
-      floor_queue.push(input);
-      if ((state_one == 0.0) || (state_two == 0.0)){
-        sigma = 0.0;
-      }
-      else{
-        printLog("PANEL:INPUT:GENERATOR - 'WAIT' \n");
-        sigma = inf;
-      }
-      break;
-    case 2.0:
-      state_two = input;
-      if (!floor_queue.empty() && (input == 0.0 || state_one == 0.0)){
-        sigma = 0.0;
-      }
-      if (floor_queue.empty() || (input == 1.0 && state_one == 1.0)){
-        sigma = inf;
-      }
-      break;
-    default:
-      break;
+  if (x.port == 0.0){
+    state_one = input;
+    if (!floor_queue.empty() && (input == 0.0 || state_two == 0.0)){
+      sigma = 0.0;
     }
+    if (floor_queue.empty() || (input == 1.0 && state_two == 1.0)){
+      sigma = inf;
+    }
+  }
+  if (x.port == 1.0){
+    floor_queue.push(input);
+    if ((state_one == 0.0) || (state_two == 0.0)){
+      sigma = 0.0;
+    }
+    else{
+      printLog("PANEL:INPUT:GENERATOR - 'WAIT' \n");
+      sigma = inf;
+    }
+  }
+  if (x.port == 2.0){
+    state_two = input;
+    if (!floor_queue.empty() && (input == 0.0 || state_one == 0.0)){
+      sigma = 0.0;
+    }
+    if (floor_queue.empty() || (input == 1.0 && state_one == 1.0)){
+      sigma = inf;
+    }
+    
+  }
   
 }
 Event priority_panel::lambda(double t) {
