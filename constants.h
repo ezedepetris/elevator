@@ -6,13 +6,13 @@
 #include "event.h"
 #include "stdarg.h"
 
-	static const double stop       = 0;
-	static const double go_up      = 1;
-	static const double go_down    = -1;
-	static const double stopped    = 0;
-	static const double going_up   = 1;
-	static const double going_down = -1;
-	static const double vacant     = 0;
-	static const double busy       = 1;
+	static const double stop       = 0.0;
+	static const double go_up      = 1.0;
+	static const double go_down    = -1.0;
+	static const double stopped    = 0.0;
+	static const double going_up   = 1.0;
+	static const double going_down = -1.0;
+	static const double vacant     = 0.0;
+	static const double busy       = 1.0;
 
 #endif
