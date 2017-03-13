@@ -14,12 +14,12 @@ class priority_panel: public Simulator {
 // Declare the state,
 // output variables
 // and parameters
-  std::queue<int> floor_queue;
-  int state_one;
-  int state_two;
+  std::queue<double> floor_queue;
+  double state_one;
+  double state_two;
   double sigma;
   double inf;
-  int output;
+  double output;
 
 public:
 	priority_panel(const char *n): Simulator(n) {};

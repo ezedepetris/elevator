@@ -14,13 +14,13 @@ class alternate_panel: public Simulator {
 // Declare the state,
 // output variables
 // and parameters
-  std::queue<int> floor_queue;
-  int state_one;
-  int state_two;
-  int last;
+  std::queue<double> floor_queue;
+  double state_one;
+  double state_two;
+  double last;
   double sigma;
   double inf;
-  int output;
+  double output;
 
 public:
 	alternate_panel(const char *n): Simulator(n) {};
