@@ -9,7 +9,7 @@
 
 using namespace std;
 namespace Elevator{
-  double Functions::TimeToDestiny(int origin_floor, int destiny_floor, double time_sended, double time_now){
+  double Functions::TimeToDestiny(double origin_floor, double destiny_floor, double time_sended, double time_now){
     double avanced_floor = (time_now - time_sended) / 2;
     double floors_to_destiny;
     if (origin_floor < destiny_floor){
@@ -20,7 +20,7 @@ namespace Elevator{
     return floors_to_destiny * 2;
   }
   
-  int Functions::ChooseController(int est1, int est2, int of1, int of2, int ff1, int ff2, double t1, double t2, int floor, double t){
+  double Functions::ChooseController(double est1, double est2, double of1, double of2, double ff1, double ff2, double t1, double t2, double floor, double t){
   	// est1 = controller one state
   	// est2 = controller two state
   	// of1 = origin floor of controller one

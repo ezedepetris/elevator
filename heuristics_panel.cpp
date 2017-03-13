@@ -55,7 +55,7 @@ void heuristics_panel::dext(Event x, double t) {
 
 
 
-  int  input = *((int*)x.value);
+  double  input = *((double*)x.value);
   if (x.port == 1){
     printLog("PANEL:INPUT:GENERATOR - FLOOR %i - TIME %f \n", input, t);
   }

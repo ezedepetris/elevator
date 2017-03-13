@@ -34,7 +34,7 @@ void controller::dext(Event x, double t) {
 //     'e' is the time elapsed since last transition
 //     NroPort 0 = panel
 //     NroPort 1 = elevator
-  int  input = *((int*)x.value);
+  double  input = *((double*)x.value);
   if (x.port == 0){
     printLog("CONTROLLER:INPUT:PANEL - FLOOR %i - TIME %f \n", input, t);
   }else{

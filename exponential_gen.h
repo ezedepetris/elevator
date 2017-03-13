@@ -26,7 +26,7 @@ double expLambda;
 double initValue;
 int seed;
 StochasticLib1 *time;
-int output;
+double output;
 double lala;
 
 double deltaL;

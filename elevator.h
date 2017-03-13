@@ -13,12 +13,12 @@ class elevator: public Simulator {
 // Declare the state,
 // output variables
 // and parameters
-  int current_floor;
-  int distance_next_floor;
-  int state;
+  double current_floor;
+  double distance_next_floor;
+  double state;
   double sigma;
   double inf;
-  int output;
+  double output;
 public:
 	elevator(const char *n): Simulator(n) {};
 	void init(double, ...);

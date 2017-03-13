@@ -16,18 +16,18 @@ class heuristics_panel: public Simulator {
 // Declare the state,
 // output variables
 // and parameters
-  std::queue<int> floor_queue;
-  int state_one;
-  int state_two;
-  int origin_floor_one;
-  int origin_floor_two;
-  int destination_floor_one;
-  int destination_floor_two;
+  std::queue<double> floor_queue;
+  double state_one;
+  double state_two;
+  double origin_floor_one;
+  double origin_floor_two;
+  double destination_floor_one;
+  double destination_floor_two;
   double time_one;
   double time_two;
   double sigma;
   double inf;
-  int output_port;
+  double output_port;
 
 public:
 	heuristics_panel(const char *n): Simulator(n) {};

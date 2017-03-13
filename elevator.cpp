@@ -42,7 +42,7 @@ void elevator::dext(Event x, double t) {
 //     'x.value' is the value (pointer to void)
 //     'x.port' is the port number
 //     'e' is the time elapsed since last transition
-  int input = *((int*)x.value);
+  double input = *((double*)x.value);
   
   if (state == stopped){
     if (input == go_up){
