@@ -3,22 +3,22 @@ Root-Coordinator
   Simulator
    {
     Path = elevator/elevator.h
-    Parameters = 
+    Parameters = 1.000000e+00
    }
   Simulator
    {
     Path = elevator/elevator.h
-    Parameters = 
+    Parameters = 2.000000e+00
    }
   Simulator
    {
     Path = elevator/controller.h
-    Parameters = 
+    Parameters = 1.000000e+00
    }
   Simulator
    {
     Path = elevator/controller.h
-    Parameters = 
+    Parameters = 2.000000e+00
    }
   Simulator
    {

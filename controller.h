@@ -13,6 +13,7 @@ class controller: public Simulator {
 // Declare the state,
 // output variables
 // and parameters
+  int number;
   double current_floor;
   double final_floor;
   double sigma;

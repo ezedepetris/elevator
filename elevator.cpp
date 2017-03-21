@@ -7,6 +7,7 @@ va_start(parameters,t);
 //where:
 //      %Name% is the parameter name
 //	%Type% is the parameter type
+number = va_arg(parameters, double);
 current_floor = 1.0;
 state = 0.0; // { -1 down, 0 stop, 1 up}
 sigma = 1e10;
@@ -20,8 +21,6 @@ double elevator::ta(double t) {
 void elevator::dint(double t) {
    
   if (state == going_up){
-    printLog("ELEVATOR:INPUT - ACTION 'STOP' - TIME %f\n", t);
-
     current_floor++;
     distance_next_floor = 2.0;
     sigma = 2.0;
@@ -46,19 +45,19 @@ void elevator::dext(Event x, double t) {
   
   if (state == stopped){
     if (input == go_up){
-      printLog("ELEVATOR:INPUT - ACTION 'GO UP' - TIME %f\n", t);
+      printLog("ELEVATOR_%d    :INPUT                     ACTION 'GO UP' - TIME %f\n",number, t);
       distance_next_floor = 2.0;
       state = going_up;
       sigma = 0.0;
     }
     if (input == go_down){
-		  printLog("ELEVATOR:INPUT - ACTION 'GO DOWN' - TIME %f\n", t);
+		  printLog("ELEVATOR_%d    :INPUT                     ACTION 'GO DOWN' - TIME %f\n",number, t);
       distance_next_floor = 2.0;
       state = going_down;
       sigma = 0.0;
     }
     if (input == stop){
-		  printLog("ELEVATOR:INPUT - ACTION 'STOP' - TIME %f\n", t);
+		  printLog("ELEVATOR_%d    :INPUT                     ACTION 'STOP' - TIME %f\n",number, t);
       distance_next_floor = 0.0;
       sigma = inf;
       state = stopped;      
@@ -66,13 +65,13 @@ void elevator::dext(Event x, double t) {
   }
   else{
     if (input == stop){
-      printLog("ELEVATOR:INPUT - ACTION 'STOP' - TIME %f\n", t);
+      printLog("ELEVATOR_%d    :INPUT                     ACTION 'STOP' - TIME %f\n",number, t);
       distance_next_floor = 0.0;
       sigma = inf;
       state = stopped;
     }
     else{
-      printLog("ELEVATOR:INPUT - ACTION 'NONE' - TIME %f\n", t);
+      printLog("ELEVATOR_%d    :INPUT                     ACTION 'NONE' - TIME %f\n",number, t);
 
       distance_next_floor = distance_next_floor - 2*e;
 		  sigma  = distance_next_floor - 2*e;
@@ -87,7 +86,7 @@ Event elevator::lambda(double t) {
 //     %NroPort% is the port number (from 0 to n-1)
 //     NroPort 0 = controller
 //     NroPort 1 = gnuplot
-  printLog("ELEVATOR:OUTPUT - FLOOR %f - TIME %f \n", current_floor, t);
+  printLog("ELEVATOR_%d    :OUTPUT                    FLOOR %f - TIME %f \n",number, current_floor, t);
   return Event(&current_floor,0);
 }
 void elevator::exit() {

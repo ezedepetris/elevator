@@ -34,6 +34,7 @@ Coupled
                 }
             Parameters
                 {
+                number = Val; 1 ; 
                 }
             }
         Atomic
@@ -52,6 +53,7 @@ Coupled
                 }
             Parameters
                 {
+                number = Val; 2 ; 
                 }
             }
         Atomic
@@ -70,6 +72,7 @@ Coupled
                 }
             Parameters
                 {
+                number = Val; 1 ; 
                 }
             }
         Atomic
@@ -88,6 +91,7 @@ Coupled
                 }
             Parameters
                 {
+                number = Val; 2 ; 
                 }
             }
         Atomic
