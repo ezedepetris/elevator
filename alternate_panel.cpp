@@ -52,12 +52,10 @@ void alternate_panel::dext(Event x, double t) {
     if (!floor_queue.empty()){
       state_one = vacant;
       sigma = 0.0;
-      break;
     }
     if(floor_queue.empty()){
       state_one = vacant;
       sigma = inf;
-      break;
     }
   }
   if (x.port == 1.0){
@@ -68,24 +66,20 @@ void alternate_panel::dext(Event x, double t) {
     if ((state_one == vacant && last == 2.0) || (state_two == vacant && last == 1.0)){
       //printLog("Panel input - ESTOY AQUI 1 \n");
       sigma = 0.0;
-      break;
     }
     if ((state_one == busy && last == 2.0) || (state_two == busy && last == 1.0)){
       printLog("PANEL:INPUT:GENERATOR - 'WAIT' \n");
       sigma = inf;
-      break;
     }
   }
   if (x.port == 2.0){
     if (!floor_queue.empty()){
       state_two = vacant;
       sigma = 0.0;
-      break;
     }
     if(floor_queue.empty()){
       state_two = vacant;
       sigma = inf;
-      break;
     }
   }
 }
