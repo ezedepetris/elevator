@@ -18,11 +18,11 @@ double priority_panel::ta(double t) {
 }
 void priority_panel::dint(double t) {
   sigma = 2.0;
-  if (state_one == 0.0){
-    state_one = 1.0;
+  if (state_one == vacant){
+    state_one = busy;
   }
   else{
-    state_two = 1.0;
+    state_two = busy;
   }
 }
 void priority_panel::dext(Event x, double t) {
@@ -45,17 +45,17 @@ void priority_panel::dext(Event x, double t) {
     printLog("PANEL:INPUT:CONTROLLER_2 - VALUE 'VACANT' - TIME %f \n", t);
   }
   if (x.port == 0.0){
-    state_one = input;
-    if (!floor_queue.empty() && (input == 0.0 || state_two == 0.0)){
+    state_one = vacant;
+    if (!floor_queue.empty()){
       sigma = 0.0;
     }
-    if (floor_queue.empty() || (input == 1.0 && state_two == 1.0)){
+    if (floor_queue.empty() ||  state_two == busy){
       sigma = inf;
     }
   }
   if (x.port == 1.0){
     floor_queue.push(input);
-    if ((state_one == 0.0) || (state_two == 0.0)){
+    if ((state_one == vacant) || (state_two == vacant)){
       sigma = 0.0;
     }
     else{
@@ -64,11 +64,11 @@ void priority_panel::dext(Event x, double t) {
     }
   }
   if (x.port == 2.0){
-    state_two = input;
-    if (!floor_queue.empty() && (input == 0.0 || state_one == 0.0)){
+    state_two = vacant;
+    if (!floor_queue.empty() || state_one == 0.0){
       sigma = 0.0;
     }
-    if (floor_queue.empty() || (input == 1.0 && state_one == 1.0)){
+    if (floor_queue.empty() || state_one == 1.0){
       sigma = inf;
     }
     
@@ -85,7 +85,7 @@ Event priority_panel::lambda(double t) {
 //     NroPort 1 = elevator two
   output = floor_queue.front();
   floor_queue.pop();
-  if (state_one == 0.0){
+  if (state_one == vacant){
     printLog("PANEL:OUTPUT:CONTROLLER_1 - FLOOR %f - TIME %f \n", output, t);
     return Event(&output,0);
   }

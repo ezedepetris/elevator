@@ -56,6 +56,7 @@ void controller::dext(Event x, double t) {
       output = 0.0;
     }
     else{
+      printLog("ENTRE POR ACAAAAA, INPUT:%f, CURRENT:%f, FINAL:%f T:%f \n",input,current_floor,final_floor, t);
       current_floor = input;
       sigma = inf;
       output = 0.0;

@@ -31,7 +31,7 @@ void elevator::dint(double t) {
     sigma = 2.0;
   }
   if (state == stopped){
-    distance_next_floor = 2.0;
+    distance_next_floor = 0.0;
     sigma = inf;
   }
 }
@@ -65,14 +65,16 @@ void elevator::dext(Event x, double t) {
   }
   else{
     if (input == stop){
+      printLog("\n\n");
       printLog("ELEVATOR_%d    :INPUT                     ACTION 'STOP' - TIME %f\n",number, t);
+      printLog("\n\n");
       distance_next_floor = 0.0;
       sigma = inf;
-      state = stopped;
+      current_floor -= state;
+      state = stop;
     }
     else{
-      printLog("ELEVATOR_%d    :INPUT                     ACTION 'NONE' - TIME %f\n",number, t);
-
+      printLog("ELEVATOR_%d    :INPUT                     ACTION '%f' - TIME %f\n",number,input, t);
       distance_next_floor = distance_next_floor - 2*e;
 		  sigma  = distance_next_floor - 2*e;
     }

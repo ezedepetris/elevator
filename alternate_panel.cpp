@@ -60,14 +60,12 @@ void alternate_panel::dext(Event x, double t) {
   }
   if (x.port == 1.0){
     floor_queue.push(input);
-    /*printLog("state one %f \n", state_one);
-    printLog("state two %f \n", state_two);
-    printLog("last %f \n", last);*/
-    if ((state_one == vacant && last == 2.0) || (state_two == vacant && last == 1.0)){
-      //printLog("Panel input - ESTOY AQUI 1 \n");
+    // if ((state_one == vacant && last == 2.0) || (state_two == vacant && last == 1.0)){
+    if ((state_one == vacant && last == 1.0) || (state_two == vacant && last == 2.0)){
       sigma = 0.0;
     }
-    if ((state_one == busy && last == 2.0) || (state_two == busy && last == 1.0)){
+    // if ((state_one == busy && last == 2.0) || (state_two == busy && last == 1.0)){
+    if ((state_one == busy && last == 1.0) || (state_two == busy && last == 2.0)){
       sigma = inf;
     }
   }
@@ -93,10 +91,12 @@ Event alternate_panel::lambda(double t) {
   output = floor_queue.front();
   floor_queue.pop();
   if(last == 2.0){
- 	 printLog("PANEL         :OUTPUT:   CONTROLLER_1    FLOOR %f - TIME %f \n", output, t);
+ 	  printLog("PANEL         :OUTPUT:   CONTROLLER_1    FLOOR %f - TIME %f \n", output, t);
+    state_one = busy;
 	  return Event(&output,0);
   }else{
-	  printLog("PANEL         :OUTPUT:   CONTROLLER_2    FLOOR %f - TIME %f \n", output, t);
+    printLog("PANEL         :OUTPUT:   CONTROLLER_2    FLOOR %f - TIME %f \n", output, t);
+    state_two = busy;
 	  return Event(&output,1);
   }
 }
