@@ -19,7 +19,7 @@ double elevator::ta(double t) {
   return sigma;
 }
 void elevator::dint(double t) {
-   
+
   if (state == going_up){
     current_floor++;
     distance_next_floor = 2.0;
@@ -42,39 +42,32 @@ void elevator::dext(Event x, double t) {
 //     'x.port' is the port number
 //     'e' is the time elapsed since last transition
   double input = *((double*)x.value);
-  
+
   if (state == stopped){
     if (input == go_up){
-      printLog("ELEVATOR_%d    :INPUT                     ACTION 'GO UP' - TIME %f\n",number, t);
       distance_next_floor = 2.0;
       state = going_up;
       sigma = 0.0;
     }
     if (input == go_down){
-		  printLog("ELEVATOR_%d    :INPUT                     ACTION 'GO DOWN' - TIME %f\n",number, t);
       distance_next_floor = 2.0;
       state = going_down;
       sigma = 0.0;
     }
     if (input == stop){
-		  printLog("ELEVATOR_%d    :INPUT                     ACTION 'STOP' - TIME %f\n",number, t);
       distance_next_floor = 0.0;
       sigma = inf;
-      state = stopped;      
+      state = stopped;
     }
   }
   else{
     if (input == stop){
-      printLog("\n\n");
-      printLog("ELEVATOR_%d    :INPUT                     ACTION 'STOP' - TIME %f\n",number, t);
-      printLog("\n\n");
       distance_next_floor = 0.0;
       sigma = inf;
       current_floor -= state;
       state = stop;
     }
     else{
-      printLog("ELEVATOR_%d    :INPUT                     ACTION '%f' - TIME %f\n",number,input, t);
       distance_next_floor = distance_next_floor - 2*e;
 		  sigma  = distance_next_floor - 2*e;
     }
@@ -88,7 +81,6 @@ Event elevator::lambda(double t) {
 //     %NroPort% is the port number (from 0 to n-1)
 //     NroPort 0 = controller
 //     NroPort 1 = gnuplot
-  printLog("ELEVATOR_%d    :OUTPUT                    FLOOR %f - TIME %f \n",number, current_floor, t);
   return Event(&current_floor,0);
 }
 void elevator::exit() {

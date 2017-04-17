@@ -38,12 +38,7 @@ void controller::dext(Event x, double t) {
 //     NroPort 0 = panel
 //     NroPort 1 = elevator
   double  input = *((double*)x.value);
-  if (x.port == 0.0){
-    printLog("CONTROLLER_%d  :INPUT:  PANEL           FLOOR %f - TIME %f \n",number,  input, t);
-  }else{
-    printLog("CONTROLLER_%d  :INPUT:  ELEVATOR_%d        FLOOR %f - TIME %f \n",number,number, input, x.port, t);
-  }
-  
+
   if (x.port == 0.0){
     final_floor = input;
     sigma = 0.0;
@@ -56,7 +51,6 @@ void controller::dext(Event x, double t) {
       output = 0.0;
     }
     else{
-      printLog("ENTRE POR ACAAAAA, INPUT:%f, CURRENT:%f, FINAL:%f T:%f \n",input,current_floor,final_floor, t);
       current_floor = input;
       sigma = inf;
       output = 0.0;
@@ -74,18 +68,15 @@ Event controller::lambda(double t) {
   if (output == 0.0){
     if (current_floor < final_floor){
       out_value = go_up;
-      printLog("CONTROLLER_%d  :OUTPUT:   ELEVATOR_%d     VALUE 'GO UP' - TIME %f\n",number,number, t);
       return Event(&out_value,0);
     }
     else{
       if (current_floor > final_floor){
         out_value = go_down;
-        printLog("CONTROLLER_%d  :OUTPUT:   ELEVATOR_%d     VALUE 'GO DOWN' - TIME %f\n",number,number, t);
         return Event(&out_value,0);
       }
       else{
         out_value = stop;
-        printLog("CONTROLLER_%d  :OUTPUT:   ELEVATOR_%d     VALUE 'STOP' - TIME %f\n",number,number, t);
         return Event(&out_value,0);
       }
     }
@@ -93,7 +84,6 @@ Event controller::lambda(double t) {
   else{
     if (current_floor == final_floor){
       out_value = vacant;
-      printLog("CONTROLLER_%d  :OUTPUT:   PANEL           VALUE 'VACANT' - TIME %f\n",number, t);
       return Event(&out_value,1);
     }
   }
