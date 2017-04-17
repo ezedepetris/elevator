@@ -20,14 +20,10 @@ class exponential_gen: public Simulator {
 // Declare the state,
 double sigma;
 // output variables
-std::string y;
 // and parameters
-double expLambda;
-double initValue;
-int seed;
 StochasticLib1 *time;
 double output;
-double lala;
+double exp_lambda;
 
 double deltaL;
 double vc;

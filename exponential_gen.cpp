@@ -8,22 +8,16 @@ va_start(parameters,t);
 //			%Name% is the parameter name
 //			%Type% is the parameter type
 
-expLambda = va_arg(parameters, double);
-initValue = va_arg(parameters, double);
-seed = (int)va_arg(parameters, double);
-vc = va_arg(parameters, double);
-deltaL = va_arg(parameters, double);
-lala = 0.9;
+exp_lambda = 9;
 time = new StochasticLib1(76);
-sigma = time -> exponential(lala);
-y = "ARRIVE";
+sigma = time -> exponential(exp_lambda);
 }
 double exponential_gen::ta(double t) {
 //This function returns a double.
 return sigma;
 }
 void exponential_gen::dint(double t) {
-sigma = time -> exponential(lala);
+sigma = time -> exponential(exp_lambda);
 output = time -> uniform(0,9);
 
 }
