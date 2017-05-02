@@ -22,7 +22,7 @@ Root-Coordinator
    }
   Simulator
    {
-    Path = elevator/exponential_gen.h
+    Path = elevator/alternate_panel.h
     Parameters = 
    }
   Simulator
