@@ -11,6 +11,8 @@ state_one = vacant;
 state_two = vacant;
 sigma = 1e10;
 inf = 1e10;
+finputs.open("event_inputs.txt");
+foutputs.open("event_outputs.txt");
 }
 double priority_panel::ta(double t) {
 //This function returns a double.
@@ -45,6 +47,7 @@ void priority_panel::dext(Event x, double t) {
     }
   }
   if (x.port == 1.0){
+    finputs << ("%f\n", t);
     floor_queue.push(input);
     if ((state_one == vacant) || (state_two == vacant)){
       sigma = 0.0;
@@ -74,6 +77,7 @@ Event priority_panel::lambda(double t) {
 //     NroPort 0 = elevator one
 //     NroPort 1 = elevator two
   output = floor_queue.front();
+  foutputs << ("%f\n", t);
   floor_queue.pop();
   if (state_one == vacant){
     return Event(&output,0);
@@ -84,5 +88,6 @@ Event priority_panel::lambda(double t) {
 }
 void priority_panel::exit() {
 //Code executed at the end of the simulation.
-
+  finputs.close();
+  foutputs.close();
 }

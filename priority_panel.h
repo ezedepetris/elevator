@@ -9,8 +9,11 @@
 #include "queue"
 #include "elevator/constants.h"
 
+#include <iostream>
+#include <fstream>
 
-class priority_panel: public Simulator { 
+
+class priority_panel: public Simulator {
 // Declare the state,
 // output variables
 // and parameters
@@ -20,6 +23,8 @@ class priority_panel: public Simulator {
   double sigma;
   double inf;
   double output;
+  ofstream finputs;
+  ofstream foutputs;
 
 public:
 	priority_panel(const char *n): Simulator(n) {};

@@ -9,8 +9,11 @@
 #include "queue"
 #include "elevator/constants.h"
 
+#include <iostream>
+#include <fstream>
 
-class alternate_panel: public Simulator { 
+
+class alternate_panel: public Simulator {
 // Declare the state,
 // output variables
 // and parameters
@@ -21,6 +24,8 @@ class alternate_panel: public Simulator {
   double sigma;
   double inf;
   double output;
+  ofstream finputs;
+  ofstream foutputs;
 
 public:
 	alternate_panel(const char *n): Simulator(n) {};
