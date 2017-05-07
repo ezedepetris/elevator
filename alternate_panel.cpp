@@ -12,8 +12,6 @@ state_two = vacant;
 last = 2.0;
 sigma = 1e10;
 inf = 1e10;
-finputs.open("event_inputs.txt");
-foutputs.open("event_outputs.txt");
 }
 double alternate_panel::ta(double t) {
 //This function returns a double.
@@ -51,8 +49,6 @@ void alternate_panel::dext(Event x, double t) {
     }
   }
   if (x.port == 1.0){
-    //add the event time to the inputs file
-    finputs << ("%f\n", t);
     floor_queue.push(input);
     if ((state_one == vacant && last == 1.0) || (state_two == vacant && last == 2.0)){
       sigma = 0.0;
@@ -81,7 +77,6 @@ Event alternate_panel::lambda(double t) {
 //     NroPort 0 = controller one
 //     NroPort 1 = controller two
   output = floor_queue.front();
-  foutputs << ("%f\n", t);
   floor_queue.pop();
   if(last == 2.0){
     state_one = busy;
@@ -93,6 +88,4 @@ Event alternate_panel::lambda(double t) {
 }
 void alternate_panel::exit() {
 //Code executed at the end of the simulation.
-  finputs.close();
-  foutputs.close();
 }

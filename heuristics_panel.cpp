@@ -18,8 +18,6 @@ void heuristics_panel::init(double t,...) {
   state_two = vacant;
   sigma = 1e10;
   inf = 1e10;
-  finputs.open("event_inputs.txt");
-  foutputs.open("event_outputs.txt");
 }
 double heuristics_panel::ta(double t) {
 //This function returns a double.
@@ -68,7 +66,6 @@ void heuristics_panel::dext(Event x, double t) {
     }
   }
   if (x.port == 1.0){
-    finputs << ("%f\n", t);
     floor_queue.push(input);
     if ((state_one == vacant && Elevator::Functions::ChooseController(state_one,state_two,origin_floor_one,origin_floor_two,destination_floor_one,destination_floor_two,time_one,time_two,floor_queue.front(),t) == 1.0) || (state_two == vacant && Elevator::Functions::ChooseController(state_one,state_two,origin_floor_one,origin_floor_two,destination_floor_one,destination_floor_two,time_one,time_two,floor_queue.front(),t) == 2.0)){
       output_port = Elevator::Functions::ChooseController(state_one,state_two,origin_floor_one,origin_floor_two,destination_floor_one,destination_floor_two,time_one,time_two,floor_queue.front(),t);
@@ -102,11 +99,8 @@ Event heuristics_panel::lambda(double t) {
 //     %NroPort% is the port number (from 0 to n-1)
 //     NroPort 0 = controller one
 //     NroPort 1 = controller two
-  foutputs << ("%f\n", t);
   return Event(&floor_queue.front(),output_port-1);
 }
 void heuristics_panel::exit() {
 //Code executed at the end of the simulation.
-  finputs.close();
-  foutputs.close();
 }

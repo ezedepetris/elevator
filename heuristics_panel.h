@@ -11,10 +11,6 @@
 #include "elevator/constants.h"
 #include "elevator/FunctionsLib.h"
 
-#include <iostream>
-#include <fstream>
-
-
 class heuristics_panel: public Simulator {
 // Declare the state,
 // output variables
@@ -31,8 +27,6 @@ class heuristics_panel: public Simulator {
   double sigma;
   double inf;
   double output_port;
-  ofstream finputs;
-  ofstream foutputs;
 
 public:
 	heuristics_panel(const char *n): Simulator(n) {};
