@@ -17,7 +17,7 @@ double priority_panel::ta(double t) {
   return sigma;
 }
 void priority_panel::dint(double t) {
-  sigma = 2.0;
+  sigma = inf;
   if (state_one == vacant){
     state_one = busy;
   }
@@ -40,7 +40,7 @@ void priority_panel::dext(Event x, double t) {
     if (!floor_queue.empty()){
       sigma = 0.0;
     }
-    if (floor_queue.empty() ||  state_two == busy){
+    else{
       sigma = inf;
     }
   }
@@ -55,10 +55,10 @@ void priority_panel::dext(Event x, double t) {
   }
   if (x.port == 2.0){
     state_two = vacant;
-    if (!floor_queue.empty() || state_one == 0.0){
+    if (!floor_queue.empty()){
       sigma = 0.0;
     }
-    if (floor_queue.empty() || state_one == 1.0){
+    else{
       sigma = inf;
     }
 
