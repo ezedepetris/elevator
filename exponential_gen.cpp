@@ -9,7 +9,7 @@ va_start(parameters,t);
 //			%Type% is the parameter type
 
 exp_lambda = (0.11);
-time = new StochasticLib1(74);
+time = new StochasticLib1(72);
 sigma = time -> exponential(exp_lambda);  
 }
 double exponential_gen::ta(double t) {

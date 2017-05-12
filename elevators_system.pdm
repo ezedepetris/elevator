@@ -98,7 +98,7 @@ Coupled
             {
             Name = panel
             Ports = 3 ; 2
-            Path = elevator/alternate_panel.h
+            Path = elevator/priority_panel.h
             Description = Atomic DEVS model
             Graphic
                 {
@@ -180,30 +180,105 @@ Coupled
                 Format5 = Str;  ; Formatting options for input 5
                 }
             }
+        Atomic
+            {
+            Name = event_inputs
+            Ports = 1 ; 0
+            Path = sinks/to_disk.h
+            Description = Save the values (event,t) in a file.
+            Graphic
+                {
+                Position = -9255 ; 2670
+                Dimension = 675 ; 675
+                Direction = Right
+                Color = 15
+                Icon = %sinks%todisk.svg
+                }
+            Parameters
+                {
+                File = Str; inputs.csv ; file name
+                }
+            }
+        Atomic
+            {
+            Name = event_outputs_two
+            Ports = 1 ; 0
+            Path = sinks/to_disk.h
+            Description = Save the values (event,t) in a file.
+            Graphic
+                {
+                Position = -6555 ; 2745
+                Dimension = 675 ; 675
+                Direction = Right
+                Color = 15
+                Icon = %sinks%todisk.svg
+                }
+            Parameters
+                {
+                File = Str; output_two.csv ; file name
+                }
+            }
+        Atomic
+            {
+            Name = event_outputs_one
+            Ports = 1 ; 0
+            Path = sinks/to_disk.h
+            Description = Save the values (event,t) in a file.
+            Graphic
+                {
+                Position = -6480 ; -2880
+                Dimension = 675 ; 675
+                Direction = Right
+                Color = 15
+                Icon = %sinks%todisk.svg
+                }
+            Parameters
+                {
+                File = Str; output_one.csv ; file name
+                }
+            }
         Point
             {
-            ConectedLines = 8 ; 10 ; 11
+            ConectedLines = 7 ; 9 ; 10
             ConectedExtrems = Org ; Org ; Org
             Position = -3075 ; -675
             }
         Point
             {
-            ConectedLines = 7 ; 12 ; 13
+            ConectedLines = 6 ; 11 ; 12
             ConectedExtrems = Org ; Org ; Org
             Position = -3075 ; 675
+            }
+        Point
+            {
+            ConectedLines = 8 ; 13 ; 14
+            ConectedExtrems = Org ; Org ; Org
+            Position = -9825 ; 0
+            }
+        Point
+            {
+            ConectedLines = 2 ; 16 ; 17
+            ConectedExtrems = Org ; Org ; Org
+            Position = -7350 ; 1125
+            }
+        Point
+            {
+            ConectedLines = 1 ; 18 ; 19
+            ConectedExtrems = Org ; Org ; Org
+            Position = -7350 ; -1200
             }
         Line
             {
             Source = Cmp ;  5 ;  1 ; 0
-            Sink = Cmp ;  3 ;  1 ; -1
-            PointX = -7875 ; -7575 ; -7575 ; -6615
+            Sink = Pnt ;  5 ; -1 ; 0
+            PointX = -7875 ; -7575 ; -7575 ; -7350
             PointY = -150 ; -150 ; -1200 ; -1200
             }
         Line
             {
             Source = Cmp ;  5 ;  2 ; 0
-            Sink = Cmp ;  4 ;  1 ; -1
-            PointX = -7875 ; -7875 ; -7575 ; -7575 ; -6615
+            Sink = Pnt ;  4 ; -1 ; 0
+            PointX = -7875 ; -7875 ; -7575 ; -7575 ; -7350
             PointY = 150 ; 150 ; 150 ; 1125 ; 1125
             }
         Line
@@ -229,13 +304,6 @@ Coupled
             }
         Line
             {
-            Source = Cmp ;  4 ;  2 ; 0
-            Sink = Cmp ;  5 ;  3 ; -1
-            PointX = -5700 ; -5700 ; -5025 ; -5025 ; -9225 ; -9225 ; -8790
-            PointY = 1425 ; 1425 ; 1425 ; 2250 ; 2250 ; 225 ; 225
-            }
-        Line
-            {
             Source = Cmp ;  2 ;  1 ; 0
             Sink = Pnt ;  2 ; -1 ; 0
             PointX = -3600 ; -3075 ; -3075
@@ -251,8 +319,8 @@ Coupled
         Line
             {
             Source = Cmp ;  6 ;  1 ; 0
-            Sink = Cmp ;  5 ;  2 ; -1
-            PointX = -10275 ; -10275 ; -8790
+            Sink = Pnt ;  3 ; -1 ; 0
+            PointX = -10275 ; -10275 ; -9825
             PointY = 0 ; 0 ; 0
             }
         Line
@@ -282,6 +350,55 @@ Coupled
             Sink = Cmp ;  4 ;  2 ; -1
             PointX = -3075 ; -3075 ; -7125 ; -7125 ; -6615
             PointY = 675 ; 375 ; 375 ; 1425 ; 1425
+            }
+        Line
+            {
+            Source = Cmp ;  9 ;  1 ; -1
+            Sink = Pnt ;  3 ; -1 ; 0
+            PointX = -9390 ; -9825 ; -9825
+            PointY = 3000 ; 3000 ; 0
+            }
+        Line
+            {
+            Source = Pnt ;  3 ; -1 ; 0
+            Sink = Cmp ;  5 ;  2 ; -1
+            PointX = -9825 ; -9825 ; -8790
+            PointY = 0 ; 0 ; 0
+            }
+        Line
+            {
+            Source = Cmp ;  4 ;  2 ; 0
+            Sink = Cmp ;  5 ;  3 ; -1
+            PointX = -5700 ; -5700 ; -5025 ; -5025 ; -9225 ; -9225 ; -8790
+            PointY = 1425 ; 1425 ; 1425 ; 2250 ; 2250 ; 225 ; 225
+            }
+        Line
+            {
+            Source = Cmp ;  10 ;  1 ; -1
+            Sink = Pnt ;  4 ; -1 ; 0
+            PointX = -6690 ; -7350 ; -7350
+            PointY = 3075 ; 3075 ; 1125
+            }
+        Line
+            {
+            Source = Pnt ;  4 ; -1 ; 0
+            Sink = Cmp ;  4 ;  1 ; -1
+            PointX = -7350 ; -6615 ; -6615
+            PointY = 1125 ; 1125 ; 1125
+            }
+        Line
+            {
+            Source = Cmp ;  11 ;  1 ; -1
+            Sink = Pnt ;  5 ; -1 ; 0
+            PointX = -6615 ; -7350 ; -7350
+            PointY = -2550 ; -2550 ; -1200
+            }
+        Line
+            {
+            Source = Pnt ;  5 ; -1 ; 0
+            Sink = Cmp ;  3 ;  1 ; -1
+            PointX = -7350 ; -6615 ; -6615
+            PointY = -1200 ; -1200 ; -1200
             }
         }
     }
