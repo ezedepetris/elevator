@@ -98,7 +98,7 @@ Coupled
             {
             Name = panel
             Ports = 3 ; 2
-            Path = elevator/priority_panel.h
+            Path = elevator/heuristics_panel.h
             Description = Atomic DEVS model
             Graphic
                 {
@@ -201,13 +201,13 @@ Coupled
             }
         Atomic
             {
-            Name = event_outputs_two
-            Ports = 1 ; 0
+            Name = event_outputs
+            Ports = 2 ; 0
             Path = sinks/to_disk.h
             Description = Save the values (event,t) in a file.
             Graphic
                 {
-                Position = -6555 ; 2745
+                Position = -5730 ; 2670
                 Dimension = 675 ; 675
                 Direction = Right
                 Color = 15
@@ -215,26 +215,7 @@ Coupled
                 }
             Parameters
                 {
-                File = Str; output_two.csv ; file name
-                }
-            }
-        Atomic
-            {
-            Name = event_outputs_one
-            Ports = 1 ; 0
-            Path = sinks/to_disk.h
-            Description = Save the values (event,t) in a file.
-            Graphic
-                {
-                Position = -6480 ; -2880
-                Dimension = 675 ; 675
-                Direction = Right
-                Color = 15
-                Icon = %sinks%todisk.svg
-                }
-            Parameters
-                {
-                File = Str; output_one.csv ; file name
+                File = Str; output.csv ; file name
                 }
             }
         Point
@@ -265,13 +246,13 @@ Coupled
             {
             ConectedLines = 1 ; 18 ; 19
             ConectedExtrems = Org ; Org ; Org
-            Position = -7350 ; -1200
+            Position = -7275 ; -1200
             }
         Line
             {
             Source = Cmp ;  5 ;  1 ; 0
             Sink = Pnt ;  5 ; -1 ; 0
-            PointX = -7875 ; -7575 ; -7575 ; -7350
+            PointX = -7875 ; -7575 ; -7575 ; -7275
             PointY = -150 ; -150 ; -1200 ; -1200
             }
         Line
@@ -376,8 +357,8 @@ Coupled
             {
             Source = Cmp ;  10 ;  1 ; -1
             Sink = Pnt ;  4 ; -1 ; 0
-            PointX = -6690 ; -7350 ; -7350
-            PointY = 3075 ; 3075 ; 1125
+            PointX = -5865 ; -7350 ; -7350
+            PointY = 2850 ; 2850 ; 1125
             }
         Line
             {
@@ -388,16 +369,16 @@ Coupled
             }
         Line
             {
-            Source = Cmp ;  11 ;  1 ; -1
+            Source = Cmp ;  10 ;  2 ; -1
             Sink = Pnt ;  5 ; -1 ; 0
-            PointX = -6615 ; -7350 ; -7350
-            PointY = -2550 ; -2550 ; -1200
+            PointX = -5865 ; -7275 ; -7275
+            PointY = 3150 ; 3150 ; -1200
             }
         Line
             {
             Source = Pnt ;  5 ; -1 ; 0
             Sink = Cmp ;  3 ;  1 ; -1
-            PointX = -7350 ; -6615 ; -6615
+            PointX = -7275 ; -6615 ; -6615
             PointY = -1200 ; -1200 ; -1200
             }
         }
